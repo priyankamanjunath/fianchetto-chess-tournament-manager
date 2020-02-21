@@ -11,3 +11,4 @@ Fianchetto is a Chess Tournament Manager. A large number of players can be paire
 
 [Complete Project Proposal](https://docs.google.com/document/d/1CGllshQlY93K2uPVRtmZDx5Tv7qODEGDOBWvUWjVOVw/edit?usp=sharing) for more information.
 
+P2 - [Project Design](https://docs.google.com/document/d/1GjefQgHI7-p52nIoHgIjwnDEsiKBjpU02Ug6YjW-yxM/edit?usp=sharing)
