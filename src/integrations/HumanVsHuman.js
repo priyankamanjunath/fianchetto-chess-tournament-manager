@@ -1,75 +1,111 @@
-import React, { Component } from "react"; // eslint-disable-line no-unused-vars
+import React, {Component} from "react"; // eslint-disable-line no-unused-vars
 import PropTypes from "prop-types";
 import Chess from "chess.js";
+import openSocket from 'socket.io-client';
 
 const game = new Chess();
+const socket = openSocket('http://localhost:8090');
 
 class HumanVsHuman extends Component {
-  static propTypes = { children: PropTypes.func };
+    constructor(props){
+        super(props);
+    }
 
-  state = { fen: "start", selectedSquares: [], myPosition: {} };
+    static propTypes = {children: PropTypes.func};
 
-  removeHighlightSquare = () => {
-    this.setState({ selectedSquares: [] });
-  };
+    state = {fen: "start", selectedSquares: [], myPosition: {}, socket: null, color: null};
 
-  highlightSquare = (sourceSquare, squares = []) => {
-    this.setState(() => ({
-      selectedSquares: [sourceSquare, ...squares]
-    }));
-  };
+    updateBoard = (data) => {
+        game.move({from: data.source, to: data.target, promotion: "q"});
+        this.setState({fen: ""}, ()=>{
+                        this.setState({
+                                          fen: data.fen,
+                                          myPosition: data.myPosition,
+                                          selecedSquares: data.selectedSquares
+                                      })
+                      })
+    };
 
-  getPosition = position => this.setState({ myPosition: position });
+    componentDidMount() {
+        this.setState({
+                          socket: socket
+                      })
+        socket.on('users:get', data => this.updateBoard(data));
+        this.setState(prevState =>{
+            prevState.color= this.props.color
+            return prevState
+        })
+    }
 
-  onDrop = (source, target) => {
-    this.removeHighlightSquare();
-    // see if the move is legal
-    var move = game.move({
-      from: source,
-      to: target,
-      promotion: "q" // NOTE: always promote to a queen for example simplicity
-    });
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.fen !== this.props.fen) {
+            this.setState({
+                              fen: this.props.fen
+                          })
+        }
+        if (prevState.color !== this.props.color){
+            this.setState({
+                color: this.props.color
+            })
+        }
+    }
+    removeHighlightSquare = () => {
+        this.setState({selectedSquares: []});
+    };
 
-    // illegal move
-    if (move === null) return;
+    highlightSquare = (sourceSquare, squares = []) => {
+        this.setState(() => ({
+            selectedSquares: [sourceSquare, ...squares]
+        }));
+    };
 
-    this.setState({ fen: game.fen() });
-    console.log(this.state.fen)
-  };
+    getPosition = position => this.setState({myPosition: position});
 
-  onMouseOverSquare = square => {
-    // get list of possible moves for this square
-    var moves = game.moves({
-      square: square,
-      verbose: true
-    });
+    onDrop = (source, target) => {
+        if(game.turn() === this.state.color) {
+            this.removeHighlightSquare();
+            // see if the move is legal
+            var move = game.move({from: source, to: target, promotion: "q"});
+            console.log("move: ", move);
+            // illegal move
+            if (move === null) {
+                return;
+            }
+            this.setState({fen: game.fen()});
+            let message = {
+                fen: this.state.fen,
+                selectedSquares: this.state.selectedSquares,
+                myPosition: this.state.myPosition,
+                source: source,
+                target: target,
+                color: this.state.color
+            }
+            this.state.socket.emit("message:send", message);
+        }
+    };
 
-    // exit if there are no moves available for this square
-    if (moves.length === 0) return;
+    onMouseOverSquare = square => {
+        // get list of possible moves for this square
+        var moves = game.moves({
+                                   square: square,
+                                   verbose: true
+                               });
 
-    // highlight the square they moused over
-    // highlight the possible squares for this piece
-    // let squaresToHighlight = [];
-    // for (var i = 0; i < moves.length; i++) {
-    //   squaresToHighlight.push(moves[i].to);
-    // }
-    //this.highlightSquare(square, squaresToHighlight);
-  };
+    };
 
-  onMouseOutSquare = () => {
-    this.removeHighlightSquare();
-  };
+    onMouseOutSquare = () => {
+        this.removeHighlightSquare();
+    };
 
-  render() {
-    const { fen, selectedSquares, myPosition } = this.state;
-    return this.props.children({
-      position: fen,
-      selectedSquares,
-      onMouseOverSquare: this.onMouseOverSquare,
-      onMouseOutSquare: this.onMouseOutSquare,
-      onDrop: this.onDrop
-    });
-  }
+    render() {
+        return this.props.children({
+                                       position: this.state.fen,
+                                       selectedSquares: this.state.selectedSquares,
+                                       onMouseOverSquare: this.onMouseOverSquare,
+                                       onMouseOutSquare: this.onMouseOutSquare,
+                                       onDrop: this.onDrop
+                                   });
+    }
 }
 
 export default HumanVsHuman;

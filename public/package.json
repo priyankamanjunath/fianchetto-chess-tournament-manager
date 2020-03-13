@@ -1,0 +1,23 @@
+{
+  "name": "chessboardjsx-v1-with-move-validation",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "chess.js": "0.10.2",
+    "chessboardjsx": "1.0.9",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-scripts": "1.1.4",
+    "roughjs": "2.1.3",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [],
+  "description": "A board that highlights and only allows for legal moves"
+}
