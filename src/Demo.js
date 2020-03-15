@@ -4,16 +4,26 @@ import Chessboard from "chessboardjsx";
 import HumanVsHuman from "./integrations/HumanVsHuman";
 
 class Demo extends Component {
+  state = {
+    color: "w",
+    position: "start"
+  };
+
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <div style={boardsContainer}>
-        <HumanVsHuman>
+        <HumanVsHuman color={this.state.color} >
           {({
-            position,
-            selectedSquares,
-            onDrop,
-            onMouseOverSquare,
-            onMouseOutSquare
+              position,
+              selectedSquares,
+              onDrop,
+              pieces,
+              onMouseOverSquare,
+              onMouseOutSquare
           }) => (
             <Chessboard
               id="humanVsHuman"
@@ -21,12 +31,27 @@ class Demo extends Component {
               position={position}
               selectedSquares={selectedSquares}
               onDrop={onDrop}
+              pieces={pieces}
               onMouseOverSquare={onMouseOverSquare}
               onMouseOutSquare={onMouseOutSquare}
               boardStyle={boardStyle}
             />
           )}
         </HumanVsHuman>
+        <select onChange={(e)=>{
+          const col = e.target.value;
+          this.setState(prevState => {
+            prevState.color = col;
+            return prevState
+          })
+        }}>
+          <option value={"w"}>
+            White
+          </option>
+          <option value={"b"}>
+            Black
+          </option>
+        </select>
       </div>
     );
   }
