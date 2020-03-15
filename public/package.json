@@ -19,5 +19,8 @@
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "description": "A board that highlights and only allows for legal moves"
+  "description": "A board that highlights and only allows for legal moves",
+  "devDependencies": {
+    "prop-types": "^15.7.2"
+  }
 }
