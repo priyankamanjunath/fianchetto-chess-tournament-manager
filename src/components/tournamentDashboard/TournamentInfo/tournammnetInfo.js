@@ -12,22 +12,9 @@ class TournamnetInfo extends React.Component{
         return(
             <div className="container p-2">
                 <div className="card">
-                    <div className={"row"}>
 
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-edit fa-xs"}></i></button>
-                        </div>
-
-
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-trash fa-xs"}></i></button>
-                        </div>
-                    </div>
                     <img src={this.state.image} className="card-img-top" alt="..."/>
                     <div className="card-body">
-
 
                         <h5 className="card-title">Tournament</h5>
 

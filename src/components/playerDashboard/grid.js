@@ -12,7 +12,7 @@ class Grid extends React.Component {
     render(){
         return (
         <div className={"container col-11"}>
-
+            <div/>
             <div className={"row"}>
             {
                 this.state.tournaments.map(function (tournament, index) {
@@ -21,6 +21,7 @@ class Grid extends React.Component {
                         tournament = {tournament}/>
                 },this)
             }
+
             </div>
 
         </div>
