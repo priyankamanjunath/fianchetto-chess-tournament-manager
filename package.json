@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "socket.io": "^2.3.0",
+    "socket.io-client": "latest",
     "chess.js": "0.10.2",
     "chessboardjsx": "1.0.9",
     "react": "^16.4.0",
@@ -17,5 +19,8 @@
     "eject": "react-scripts eject"
   },
   "keywords": [],
-  "description": "A board that highlights and only allows for legal moves"
+  "description": "A board that highlights and only allows for legal moves",
+  "devDependencies": {
+    "react-router-dom": "^5.1.2"
+  }
 }

@@ -1,0 +1,16 @@
+.pm-sign-in-content {
+    max-width: 600px;
+    margin: auto;
+}
+
+
+.pm-login-button {
+    background-color: darkslategrey;
+    border-color: black;
+}
+
+
+.pm-login-button:hover {
+    background-color: darkcyan;
+    border-color: black;
+}
