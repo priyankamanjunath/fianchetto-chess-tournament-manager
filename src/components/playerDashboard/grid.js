@@ -5,21 +5,20 @@ import GridItem from "./gridItem";
 class Grid extends React.Component {
 
 
+    state = {
+        tournaments  : [1,2,3,4,5]
+    }
+
     render(){
         return (
         <div className={"container col-11"}>
-            <Header
-                toggleLayout = {this.props.toggleLayout}
-            />
 
             <div className={"row"}>
             {
-                this.state.tournaments.map(function (course, index) {
+                this.state.tournaments.map(function (tournament, index) {
                     return <GridItem
                         key = {index}
-                        course = {course}
-                        goToEditor = {this.props.goToEditor}
-                        deleteCourse = {this.props.deleteCourse}/>
+                        tournament = {tournament}/>
                 },this)
             }
             </div>
