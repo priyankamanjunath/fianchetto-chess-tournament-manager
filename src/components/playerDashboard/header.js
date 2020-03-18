@@ -1,13 +1,16 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 class Header extends React.Component {
     render() {
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-                <a className="btn btn-primary" to = "/course-List">
-                    <i className="fas fa fa-times text-white"/>
-                </a>
+                <Link to={"/login"}>
+                    <a className="btn btn-primary" to = "/course-List">
+                        <i className="fas fa fa-times text-white"/>
+                    </a>
+                </Link>
                 <a className="navbar-brand wbdv-course-title" href="#">User Dashboard</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

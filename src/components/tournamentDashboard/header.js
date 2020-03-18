@@ -1,13 +1,16 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 class HeaderTournamentDashboard extends React.Component {
     render() {
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-                <a className="btn btn-primary text-white" to = "/course-List">
-                    <i className="fas fa fa-times"/>
-                </a>
+                <Link to={"/dashboard"}>
+                    <a className="btn btn-primary text-white" to = "/course-List">
+                        <i className="fas fa fa-times"/>
+                    </a>
+                </Link>
                 <a className="navbar-brand wbdv-course-title" href="#">Tournament</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +24,9 @@ class HeaderTournamentDashboard extends React.Component {
 
 
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">My Matches<span className="sr-only">(current)</span></a>
+                            <Link to={"/demo"}>
+                                <a className="nav-link" href="#">My Matches<span className="sr-only">(current)</span></a>
+                            </Link>
                         </li>
 
                         <li className="nav-item active">
