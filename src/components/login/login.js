@@ -32,7 +32,9 @@ const Login = () =>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label"></label>
                 <div className="col-sm-10">
-                    <button className="btn btn-primary btn-block wbdv-login">Sign in</button>
+                    <Link to={"/dashboard"}>
+                        <button className="btn btn-primary btn-block wbdv-login">Sign in</button>
+                    </Link>
                     <div className="row">
 
                     </div>
@@ -46,9 +48,11 @@ const Login = () =>
                         <a href="#" className="">Forgot Password?</a>
                     </div>
                     <div className="col">
+                        <Link to={"/register"}>
                         <a href="../signup/signup.template.client.html"
                            className="float-right">
                             Sign up</a>
+                        </Link>
                     </div>
                 </div>
             </div>
