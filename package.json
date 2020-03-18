@@ -8,6 +8,7 @@
     "particles-bg": "^2.4.7",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^5.1.2",
     "react-particles-js": "^2.7.1",
     "react-scripts": "1.1.4",
     "roughjs": "2.1.3",

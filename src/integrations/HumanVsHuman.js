@@ -4,7 +4,7 @@ import Chess from "chess.js";
 import openSocket from 'socket.io-client';
 
 const game = new Chess();
-const socket = openSocket('http://localhost:8090');
+const socket = openSocket('https://fianchetto-server.herokuapp.com/');
 
 class HumanVsHuman extends Component {
     constructor(props){
