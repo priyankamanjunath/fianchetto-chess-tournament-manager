@@ -32,7 +32,7 @@ class HumanVsHuman extends Component {
                       })
         socket.on('users:get', data => this.updateBoard(data));
         this.setState(prevState =>{
-            prevState.color= this.props.color
+            prevState.color= this.props.olor
             return prevState
         })
     }
