@@ -14,7 +14,7 @@ class RoutingContainer extends React.Component
         return(
                 <div className={"container-fluid m-0 p-0"}>
                     <Router>
-                        <Redirect from="/" to "/login" />
+                        <Redirect from="/" to="/login" />
                         <Route exact path = "/demo"
                                render={(props) =>
                                    <Chessboard/>
