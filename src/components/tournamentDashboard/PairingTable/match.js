@@ -17,7 +17,12 @@ class Match extends React.Component {
         return (
 
             <tr>
+                <td>ABC</td>
+                <td>XYZ</td>
+                <td>1 - 0</td>
                 <td>Hello</td>
+                <td>Hello</td>
+
             </tr>
         )
     }

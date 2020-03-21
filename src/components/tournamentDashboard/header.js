@@ -30,7 +30,10 @@ class HeaderTournamentDashboard extends React.Component {
                         </li>
 
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Round Pairings<span className="sr-only">(current)</span></a>
+                            <Link to={"/pairings"}>
+                                <a className="nav-link" href="#">Round Pairings<span className="sr-only">(current)</span></a>
+                            </Link>
+                            {/*<a className="nav-link" href="#">Round Pairings<span className="sr-only">(current)</span></a>*/}
                         </li>
 
                         <li className="nav-item active">
