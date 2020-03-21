@@ -5,6 +5,7 @@ import Login from "../components/login/login";
 import Register from "../components/register/register";
 import Dashboard from "../components/playerDashboard/dashboard";
 import TournamentPage from "../components/tournamentDashboard/home";
+import PairingTableView from "../components/tournamentDashboard/PairingTable/pairingTableView";
 
 
 class RoutingContainer extends React.Component
@@ -14,7 +15,7 @@ class RoutingContainer extends React.Component
         return(
                 <div className={"container-fluid m-0 p-0"}>
                     <Router>
-                        <Redirect from="/" to="/login" />
+                        {/*<Redirect from="/" to="/login" />*/}
                         <Route exact path = "/demo"
                                render={(props) =>
                                    <Chessboard/>
@@ -40,6 +41,12 @@ class RoutingContainer extends React.Component
                         <Route exact path = "/dashboard"
                                render={(props) =>
                                    <Dashboard/>
+                               }
+                        />
+
+                        <Route exact path = "/pairings"
+                               render={(props) =>
+                                   <PairingTableView/>
                                }
                         />
                     </Router>
