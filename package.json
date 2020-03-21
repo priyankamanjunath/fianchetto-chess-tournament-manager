@@ -1,5 +1,5 @@
 {
-  "name": "chessboardjsx-v1-with-move-validation",
+  "name": "fianchetto-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,11 +8,12 @@
     "particles-bg": "^2.4.7",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^5.1.2",
     "react-particles-js": "^2.7.1",
     "react-scripts": "1.1.4",
     "roughjs": "2.1.3",
     "socket.io": "^2.3.0",
-    "socket.io-client": "latest"
+    "socket.io-client": "1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

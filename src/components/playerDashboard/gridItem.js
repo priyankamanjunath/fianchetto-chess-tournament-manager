@@ -34,7 +34,7 @@ class GridItem extends React.Component{
 
                         <p className="card-text">Some quick example text to build on the card title and make up the
                             bulk of the card's content.</p>
-                        <Link className={"col btn btn-primary"} to = {``}>
+                        <Link className={"col btn btn-primary"} to = {`/tournament`}>
                             Go to Tournament
                         </Link>
 
