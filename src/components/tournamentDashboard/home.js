@@ -1,9 +1,12 @@
 import React from "react";
 import Header from "./header";
-import TournamnetInfo from "./TournamentInfo/tournammnetInfo";
+import TournamnetInfo from "./TournamentInfo/tournamentInfo";
 import ParticlesBg from "particles-bg";
 
 class TournamentPage extends React.Component {
+    componentDidMount() {
+    }
+
     render() {
         let config = {
             num: [4, 7],
@@ -21,9 +24,9 @@ class TournamentPage extends React.Component {
         };
         return (
             <div>
-                <Header/>
+                <Header userId={this.props.userId}/>
                 <TournamnetInfo/>
-                <ParticlesBg type="custom" config={config} bg={true}/>
+                {/*<ParticlesBg type="custom" config={config} bg={true}/>*/}
             </div>
         )
 

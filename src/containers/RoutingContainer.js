@@ -6,6 +6,18 @@ import Register from "../components/register/register";
 import Dashboard from "../components/playerDashboard/dashboard";
 import TournamentPage from "../components/tournamentDashboard/home";
 import PairingTableView from "../components/tournamentDashboard/PairingTable/pairingTableView";
+import {createStore, combineReducers} from 'redux'
+import {Provider} from 'react-redux'
+import userReducer from "../reducers/userReducer"
+import tournamentReducer from "../reducers/tournamentReducer"
+
+
+const rootReducer = combineReducers({
+                                        userReducer: userReducer,
+                                        tournamentReducer: tournamentReducer
+                                    });
+
+const store = createStore(rootReducer);
 
 
 class RoutingContainer extends React.Component
@@ -14,42 +26,50 @@ class RoutingContainer extends React.Component
     {
         return(
                 <div className={"container-fluid m-0 p-0"}>
-                    <Router>
-                        {/*<Redirect from="/" to="/login" />*/}
-                        <Route exact path = "/demo"
-                               render={(props) =>
-                                   <Chessboard/>
-                               }
-                        />
-                        <Route exact path = "/tournament"
-                               render={(props) =>
-                                   <TournamentPage/>
-                               }
-                        />
+                    <Provider store={store}>
+                        <Router>
+                            {/*<Redirect from="/" to="/login" />*/}
+                            <Route exact path = "/demo"
+                                   render={(props) =>
+                                       <Chessboard/>
+                                   }
+                            />
+                            <Route exact path = "/user/:userId/tournament/:tournamentId"
+                                   render={(props) =>
+                                       <TournamentPage
+                                            userId = {props.match.params.userId}
+                                            tournamentId = {props.match.params.tournamentId}
+                                       />
+                                   }
+                            />
 
-                        <Route exact path = "/login"
-                               render={(props) =>
-                                   <Login/>
-                               }
-                        />
-                        <Route exact path = "/register"
-                               render={(props) =>
-                                   <Register/>
-                               }
-                        />
+                            <Route exact path = "/login"
+                                   render={(props) =>
+                                       <Login/>
+                                   }
+                            />
+                            <Route exact path = "/register"
+                                   render={(props) =>
+                                       <Register/>
+                                   }
+                            />
 
-                        <Route exact path = "/dashboard"
-                               render={(props) =>
-                                   <Dashboard/>
-                               }
-                        />
+                            <Route exact path = "/user/:userId/dashboard"
+                                   render={(props) =>
+                                       <Dashboard
+                                           userId = {props.match.params.userId}
+                                           {...props}
+                                       />
+                                   }
+                            />
 
-                        <Route exact path = "/pairings"
-                               render={(props) =>
-                                   <PairingTableView/>
-                               }
-                        />
-                    </Router>
+                            <Route exact path = "/pairings"
+                                   render={(props) =>
+                                       <PairingTableView/>
+                                   }
+                            />
+                        </Router>
+                    </Provider>
                 </div>
 
         )
