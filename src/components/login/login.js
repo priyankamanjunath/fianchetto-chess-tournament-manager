@@ -32,7 +32,7 @@ const Login = () =>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label"></label>
                 <div className="col-sm-10">
-                    <Link to={"/dashboard"}>
+                    <Link to={"/user/123/dashboard"}>
                         <button className="btn btn-primary btn-block wbdv-login">Sign in</button>
                     </Link>
                     <div className="row">
