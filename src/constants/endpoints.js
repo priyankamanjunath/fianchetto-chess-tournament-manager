@@ -1,2 +1,1 @@
-export const JPA_SERVER = "https://wbdv-generic-server.herokuapp.com"
-
+export const JPA_SERVER = "https://fianchetto-java.herokuapp.com";

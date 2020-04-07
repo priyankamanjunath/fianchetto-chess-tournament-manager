@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./header";
 import TournamnetInfo from "./TournamentInfo/tournamentInfo";
-import ParticlesBg from "particles-bg";
 
 class TournamentPage extends React.Component {
     componentDidMount() {
@@ -26,7 +25,6 @@ class TournamentPage extends React.Component {
             <div>
                 <Header userId={this.props.userId}/>
                 <TournamnetInfo/>
-                {/*<ParticlesBg type="custom" config={config} bg={true}/>*/}
             </div>
         )
 

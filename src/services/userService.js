@@ -7,7 +7,7 @@ export const findUserInfo = (userId) =>
         .then(response => response.json());
 
 export const createUser = async (userInfo) => {
-    const response = await fetch(`${JPA_SERVER}/create/users`, {
+    const response = await fetch(`${JPA_SERVER}/api/users`, {
         method: "POST",
         body: JSON.stringify(userInfo),
         headers: {

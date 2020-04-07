@@ -10,6 +10,7 @@ import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import userReducer from "../reducers/userReducer"
 import tournamentReducer from "../reducers/tournamentReducer"
+import CreateTournament from "../components/tournamentDashboard/createTournament/createTournament";
 
 
 const rootReducer = combineReducers({
@@ -66,6 +67,12 @@ class RoutingContainer extends React.Component
                             <Route exact path = "/pairings"
                                    render={(props) =>
                                        <PairingTableView/>
+                                   }
+                            />
+
+                            <Route exact path = "/createTournament"
+                                   render={(props) =>
+                                       <CreateTournament/>
                                    }
                             />
                         </Router>

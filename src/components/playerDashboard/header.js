@@ -7,7 +7,7 @@ class Header extends React.Component {
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
                 <Link to={"/login"}>
-                    <a className="btn btn-primary" to = "/course-List">
+                    <a className="btn btn-primary" >
                         <i className="fas fa fa-times text-white"/>
                     </a>
                 </Link>
@@ -29,7 +29,9 @@ class Header extends React.Component {
                         <li className="nav-item active">
                             <a className="nav-link" href="#">Settings<span className="sr-only">(current)</span></a>
                         </li>
-
+                        <li>
+                            <Link to={"/createTournament"}><a class = "nav-link">Create New Tournamanet</a></Link>
+                        </li>
 
 
                     </ul>
