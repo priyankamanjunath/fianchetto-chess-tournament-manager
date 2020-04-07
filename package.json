@@ -1,5 +1,5 @@
 {
-  "name": "fianchetto-client",
+  "name": "chessboardjsx-v1-with-move-validation",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
