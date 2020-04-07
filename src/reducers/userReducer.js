@@ -1,6 +1,4 @@
-import {
-    FIND_USER_INFO
-} from "../actions/userActions";
+import {CREATE_USER, FIND_USER_INFO} from "../actions/userActions";
 
 let userInfo = {
         id: "123",
@@ -82,11 +80,19 @@ let userInfo = {
 };
 
 const userReducer = (state={userInfo: userInfo}, action) => {
+    let users;
     switch (action.type) {
         case FIND_USER_INFO:
             return {
                 ...state,
                 userInfo: action.userInfo
+            }
+        case CREATE_USER:
+            users = [...state.users];
+            users.push(action.userInfo);
+
+            return {
+                users: userInfo
             }
         default:
             return state
