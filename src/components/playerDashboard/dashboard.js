@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.findUserInfo(this.props.userId)
+        this.props.findUserInfo(this.props.userId)
     }
 
     render() {
@@ -80,7 +80,6 @@ class Dashboard extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => {
-    console.log(state)
     return {
         tournamentList: state.userReducer.userInfo.tournamentList
     }

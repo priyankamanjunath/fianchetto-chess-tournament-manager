@@ -10,6 +10,7 @@ class TournamentInfo extends React.Component{
     }
 
     componentDidMount() {
+        console.log("tournament id :", this.props.tournamentId);
         this.props.findTournamentInfo(this.props.tournamentId)
     }
 
@@ -30,6 +31,17 @@ class TournamentInfo extends React.Component{
                         <p className="card-text">Active: &nbsp;
                             {this.props.tournamentInfo.inProgress && "Yes"}
                             {!this.props.tournamentInfo.inProgress && "No"}
+                        </p>
+                        <p>
+                            Started on: {this.props.tournamentInfo.startDate.substring(0,10)}
+                            <br/>
+                            Ended on: {this.props.tournamentInfo.endDate.substring(0,10)}
+                        </p>
+                        <p>
+                            Prize: {this.props.tournamentInfo.prize}
+                        </p>
+                        <p>
+                            Winner: {this.props.tournamentInfo.winner}
                         </p>
                     </div>
                 </div>

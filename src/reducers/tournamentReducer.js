@@ -16,6 +16,7 @@ let tournamentInfo = {
 };
 
 const tournamentReducer = (state={tournamentInfo: tournamentInfo}, action) => {
+    console.log("action: ", action);
     let tournaments;
     switch (action.type) {
         case FIND_TOURNAMENT_INFO:

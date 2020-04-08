@@ -24,7 +24,8 @@ class TournamentPage extends React.Component {
         return (
             <div>
                 <Header userId={this.props.userId}/>
-                <TournamnetInfo/>
+                <TournamnetInfo
+                    tournamentId = {this.props.tournamentId}/>
             </div>
         )
 
