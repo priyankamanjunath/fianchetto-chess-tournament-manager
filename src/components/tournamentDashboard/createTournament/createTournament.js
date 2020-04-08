@@ -110,7 +110,7 @@ class CreateTournament extends Component {
                         <div className="col-sm-10">
 
                             <button className="btn btn-primary btn-block wbdv-login"
-                                    onClick={this.submitNewTournament()}>Create New User
+                                    onClick={this.submitNewTournament()}>Create New Tournament
                             </button>
 
                         </div>
