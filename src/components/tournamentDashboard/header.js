@@ -3,13 +3,17 @@ import {Link} from "react-router-dom";
 
 
 class HeaderTournamentDashboard extends React.Component {
+
+    componentDidMount() {
+    }
+
     render() {
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-                <Link to={"/dashboard"}>
-                    <a className="btn btn-primary text-white" to = "/course-List">
+                <Link className="btn btn-primary text-white" to={`/user/${this.props.userId}/dashboard`}>
+                    {/*<a className="btn btn-primary text-white">*/}
                         <i className="fas fa fa-times"/>
-                    </a>
+                    {/*</a>*/}
                 </Link>
                 <a className="navbar-brand wbdv-course-title" href="#">Tournament</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

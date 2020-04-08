@@ -2,8 +2,26 @@ import React from "react";
 import Header from "./header";
 import Grid from "./grid";
 import ParticlesBg from "particles-bg";
+import {connect} from "react-redux";
+import userService from "../../services/userService";
+import {findUserInfo} from "../../actions/userActions";
+import GridItem from "./gridItem";
 
 class Dashboard extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            userInfo: {
+                tournamentList: []
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.props.findUserInfo(this.props.userId)
+    }
+
     render() {
         let config = {
             num: [4, 7],
@@ -26,18 +44,58 @@ class Dashboard extends React.Component {
                 <div className={"container"}>
                     <h3 className={"text-center"}>Active</h3>
                     <div className="border-top my-3"/>
-                    <Grid/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map(item =>
+                                    item.inProgress &&
+                                    <GridItem
+                                        userId = {this.props.userId}
+                                        tournament = {item}/>
+                                )
+                            }
+                        </div>
+                    </div>
+
                     <h3 className={"text-center"}>Past</h3>
                     <div className="border-top my-3"/>
-                    <Grid/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map(item =>
+                                                                  !item.inProgress &&
+                                                                  <GridItem
+                                                                      userId = {this.props.userId}
+                                                                      tournament = {item}/>
+                                )
+                            }
+                        </div>
+                    </div>
                     <ParticlesBg type="cobweb" config={config} bg={true}/>
 
                 </div>
            </div>
        )
-
     }
-
-
 }
-export default Dashboard
+
+const stateToPropertyMapper = (state) => {
+    return {
+        tournamentList: state.userReducer.userInfo.tournamentList
+    }
+};
+
+
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+        findUserInfo: (userId) => {
+            userService.findUserInfo(userId)
+                .then(userInfo =>
+                          dispatch(findUserInfo(userInfo)))
+
+        }
+    }
+};
+
+
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(Dashboard)
