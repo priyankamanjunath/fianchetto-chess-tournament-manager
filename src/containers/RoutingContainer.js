@@ -44,7 +44,7 @@ class RoutingContainer extends React.Component
                                    }
                             />
 
-                            <Route exact path = "/login"
+                            <Route exact path = "/"
                                    render={(props) =>
                                        <Login/>
                                    }
