@@ -2,9 +2,10 @@ import React, {Component} from "react"; // eslint-disable-line no-unused-vars
 import PropTypes from "prop-types";
 import Chess from "chess.js";
 import openSocket from 'socket.io-client';
+import {NODE_SERVER} from "../constants/endpoints";
 
 const game = new Chess();
-const socket = openSocket('https://fianchetto-server.herokuapp.com/');
+const socket = openSocket(NODE_SERVER);
 
 class HumanVsHuman extends Component {
     constructor(props){

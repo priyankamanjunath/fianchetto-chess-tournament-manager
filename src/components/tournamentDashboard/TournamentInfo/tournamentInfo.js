@@ -10,7 +10,6 @@ class TournamentInfo extends React.Component{
     }
 
     componentDidMount() {
-        console.log("tournament id :", this.props.tournamentId);
         this.props.findTournamentInfo(this.props.tournamentId)
     }
 
