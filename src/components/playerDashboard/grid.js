@@ -1,31 +1,89 @@
-import React from 'react';
-import Header from "./header";
+import React from "react";
+import {connect} from "react-redux";
+import userService from "../../services/userService";
+import {findUserInfo} from "../../actions/userActions";
 import GridItem from "./gridItem";
 
-class Grid extends React.Component {
+class playerGrid extends React.Component {
 
-
-    state = {
-        tournaments  : [1,2,3,4,5]
+    constructor(props){
+        super(props);
+        this.state = {
+            userInfo: {
+                tournamentList: []
+            }
+        }
     }
 
-    render(){
+    componentDidMount() {
+        this.props.findUserInfo(this.props.userId)
+    }
+
+    render() {
+
         return (
-        <div className={"container col-11"}>
-            
-            <div className={"row"}>
-            {
-                this.state.tournaments.map(function (tournament, index) {
-                    return <GridItem
-                        key = {index}
-                        tournament = {tournament}/>
-                },this)
-            }
+            <div>
+                    <h3 className={"text-center"}>Active</h3>
+                    <div className="border-top my-3"/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => item.inProgress &&
+                                        <GridItem
+                                            key = {index}
+                                            userId = {this.props.userId}
+                                            tournament = {item}
+                                        />
+                                )
+                            }
+                        </div>
+                    </div>
+
+                    <h3 className={"text-center"}>Past</h3>
+                    <div className="border-top my-3"/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map
+                                (
+
+                                    (item, index) => !item.inProgress &&
+                                        <GridItem
+                                            key = {index}
+                                            userId = {this.props.userId}
+                                            tournament = {item}
+                                        />
+
+                                )
+                            }
+                        </div>
+                    </div>
+
 
             </div>
-
-        </div>
-    )}
+        )
+    }
 }
 
-export default Grid
+const stateToPropertyMapper = (state) => {
+    return {
+        tournamentList: state.userReducer.userInfo.tournamentList
+    }
+};
+
+
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+        findUserInfo: (userId) => {
+            userService.findUserInfo(userId)
+                .then(userInfo =>
+                    dispatch(findUserInfo(userInfo)))
+
+        }
+    }
+};
+
+
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(playerGrid)

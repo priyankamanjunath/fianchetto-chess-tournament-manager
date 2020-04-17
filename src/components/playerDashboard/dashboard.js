@@ -1,13 +1,11 @@
 import React from "react";
 import Header from "./header";
-import Grid from "./grid";
-import ParticlesBg from "particles-bg";
 import {connect} from "react-redux";
 import userService from "../../services/userService";
 import {findUserInfo} from "../../actions/userActions";
 import GridItem from "./gridItem";
 
-class Dashboard extends React.Component {
+class playerDashboard extends React.Component {
 
     constructor(props){
         super(props);
@@ -23,21 +21,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        let config = {
-            num: [4, 7],
-            rps: 0.1,
-            radius: [5, 40],
-            life: [1.5, 3],
-            v: [2, 3],
-            tha: [-50, 50],
-            alpha: [0.6, 0],
-            scale: [.1, 0.9],
-            // body: icon,
-            position: "all",
-            //color: ["random", "#ff0000"],
-            cross: "dead",
-            random: 10
-        };
+
         return (
             <div>
                 <Header/>
@@ -47,11 +31,14 @@ class Dashboard extends React.Component {
                     <div className={"container col-11"}>
                         <div className={"row"}>
                             {
-                                this.props.tournamentList.map(item =>
-                                    item.inProgress &&
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => item.inProgress &&
                                     <GridItem
+                                        key = {index}
                                         userId = {this.props.userId}
-                                        tournament = {item}/>
+                                        tournament = {item}
+                                    />
                                 )
                             }
                         </div>
@@ -62,16 +49,21 @@ class Dashboard extends React.Component {
                     <div className={"container col-11"}>
                         <div className={"row"}>
                             {
-                                this.props.tournamentList.map(item =>
-                                                                  !item.inProgress &&
-                                                                  <GridItem
-                                                                      userId = {this.props.userId}
-                                                                      tournament = {item}/>
+                                this.props.tournamentList.map
+                                (
+
+                                    (item, index) => !item.inProgress &&
+                                      <GridItem
+                                          key = {index}
+                                          userId = {this.props.userId}
+                                          tournament = {item}
+                                      />
+
                                 )
                             }
                         </div>
                     </div>
-                    <ParticlesBg type="cobweb" config={config} bg={true}/>
+
 
                 </div>
            </div>
@@ -98,4 +90,4 @@ const dispatchToPropertyMapper = (dispatch) => {
 };
 
 
-export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(Dashboard)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(playerDashboard)
