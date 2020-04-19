@@ -1,17 +1,20 @@
 import React from 'react';
 import Match from "./match";
 import {connect} from "react-redux";
+import {getMatchups} from "swiss-pairing";
 
 const stateToPropertyMapper = (state) => {
 
     return {
-        rounds: state.roundReducer.rounds
+        rounds: state.roundReducer.rounds,
+
     }
 }
 
-
+const pairL = require("swiss-pairing")
 
 class PairingTableView extends React.Component {
+
 
     constructor(props) {
         super(props);
@@ -19,10 +22,8 @@ class PairingTableView extends React.Component {
 
     state = {
         round : []
+
     }
-
-
-
 
     componentDidMount() {
         this.setState({
@@ -41,6 +42,7 @@ class PairingTableView extends React.Component {
         }
         this.setState({
             round : roundMod
+
         })
     }
 
@@ -49,7 +51,7 @@ class PairingTableView extends React.Component {
             <div className="m-4">
                 <div className="mx-5">
                     <div className={"row"}>
-                        <div className={"col-10"}>
+                        <div className={"col-8"}>
                             <h4>Round : {this.props.roundid}</h4>
                         </div>
                         <div className={"col-2 text-right"}>
@@ -58,7 +60,20 @@ class PairingTableView extends React.Component {
                                 onClick={() =>
                                     this.props.updateRoundDispatcher(this.props.roundid, this.state.round)
                                 }>
+
+
                                 Save Changes
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                className={"btn btn-info"}
+                                onClick={() =>
+                                  // console.log("hello")
+                                    getMatchups()
+                                }>
+
+                                Click me
                             </button>
                         </div>
                     </div>
