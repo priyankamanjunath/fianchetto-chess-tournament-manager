@@ -8,6 +8,7 @@ import {createRoundService, findAllRoundsService, updateRoundService} from "../s
 import {createRoundAction, findAllRoundsAction, updateRoundAction} from "../actions/pairingActions";
 
 const stateToPropertyMapper = (state) => {
+
     return {
         rounds: state.roundReducer.rounds
     }
@@ -46,6 +47,12 @@ class PairingContainer extends React.Component
         this.props.findAllRoundsDispatcher()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.rounds !== this.props.rounds) {
+            // this.props.findAllRoundsDispatcher()
+        }
+    }
+
 
     render()
     {
@@ -81,7 +88,6 @@ class PairingContainer extends React.Component
                                     roundid = {props.match.params.roundid}
                                     userid = {this.props.userid}
                                     tid = {this.props.tid}
-
                                     updateRoundDispatcher = {this.props.updateRoundDispatcher}
                                 />
                             </div>

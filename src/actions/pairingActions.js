@@ -1,5 +1,6 @@
 export const FIND_TOURNAMENT_ROUNDS = "FIND_TOURNAMENT_ROUNDS";
 export const CREATE_ROUND = "CREATE_ROUND";
+export const UPDATE_ROUND = "UPDATE_ROUND";
 
 export const findAllRoundsAction = (rounds) => {
     console.log("calling action")

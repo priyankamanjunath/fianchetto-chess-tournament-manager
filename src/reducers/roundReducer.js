@@ -1,4 +1,4 @@
-import {CREATE_ROUND, FIND_TOURNAMENT_ROUNDS} from "../actions/pairingActions";
+import {CREATE_ROUND, FIND_TOURNAMENT_ROUNDS, UPDATE_ROUND} from "../actions/pairingActions";
 
 
 const initialState = {
@@ -20,6 +20,18 @@ const roundReducer = (state = initialState, action) => {
                 ...state.rounds,
                 action.round
             ]
+        }
+    }
+    else if(action.type === UPDATE_ROUND){
+        return {
+            ...state,
+            rounds: state.rounds.map(
+                (round) => {
+                    if(round._id === action.roundid){
+                        round = action.round
+                    }
+                    return round;
+                })
         }
     }
     else {

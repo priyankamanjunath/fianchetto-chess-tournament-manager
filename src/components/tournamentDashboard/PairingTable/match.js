@@ -18,6 +18,13 @@ class Match extends React.Component {
         })
     }
 
+    update = (e) => {
+        this.setState({
+            result: e.target.value
+        });
+        this.props.updateRound(this.props.match.id, e.target.value)
+    }
+
     render(){
         return (
 
@@ -29,12 +36,7 @@ class Match extends React.Component {
                         className="form-control"
                         value={this.state.result}
                         onChange ={
-                            (e) => {
-                                this.setState({
-                                    result: e.target.value
-                                });
-
-                            }
+                            (e) => this.update(e)
                         }
                     >
                         <option value={"WIN"}>White Wins</option>

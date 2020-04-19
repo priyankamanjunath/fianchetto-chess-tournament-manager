@@ -23,42 +23,42 @@ class PairingHeader extends React.Component {
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "2",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "3",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "4",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "5",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "6",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
                     "arbiter" : "AR1"
                 },
                 {
-                    "id" : "1",
+                    "id" : "6",
                     "white" : "PW1",
                     "black" : "PB1",
                     "result" : "NA",
@@ -74,7 +74,7 @@ class PairingHeader extends React.Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.rounds !== this.props.round){
+        if(prevProps.rounds !== this.props.rounds){
             console.log(this.props.userid)
         }
     }

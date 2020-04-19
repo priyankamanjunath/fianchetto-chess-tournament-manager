@@ -13,22 +13,35 @@ const stateToPropertyMapper = (state) => {
 
 class PairingTableView extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
 
     state = {
-        round : this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0]
-    };
-
-    updateRound(id, value) {
-        for(let match in this.props.rounds) {
-
-        }
-
+        round : []
     }
 
 
-    componentDidMount() {
-        this.state.round = this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0]
 
+
+    componentDidMount() {
+        this.setState({
+            round : this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0]
+        })
+    }
+
+
+
+    updateRound = (id, value) => {
+        const roundMod = this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0];
+        for(let i in roundMod.matchList){
+            if(roundMod.matchList[i].id === id && roundMod.matchList[i].result !== value) {
+                roundMod.matchList[i].result = value
+            }
+        }
+        this.setState({
+            round : roundMod
+        })
     }
 
     render(){
@@ -43,7 +56,7 @@ class PairingTableView extends React.Component {
                             <button
                                 className={"btn btn-info"}
                                 onClick={() =>
-                                    this.updateRound(1,2)// this.props.updateRoundDispatcher(this.props.roundid, this.state.round)
+                                    this.props.updateRoundDispatcher(this.props.roundid, this.state.round)
                                 }>
                                 Save Changes
                             </button>
@@ -62,11 +75,14 @@ class PairingTableView extends React.Component {
                         <tbody>
                         {
                             this.props.rounds.length !== 0  &&
-                            this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0]
-                            .matchList.map(function (match, index) {
+                            this.props.rounds
+                                .filter(rounds => rounds._id === this.props.roundid)[0].matchList
+                                .map(function (match, index) {
                                 return <Match
                                     key={index}
                                     match = {match}
+                                    updateRound = {this.updateRound}
+
                                 />
                             }, this)
                         }
