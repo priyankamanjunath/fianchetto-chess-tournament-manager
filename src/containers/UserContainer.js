@@ -6,15 +6,9 @@ import tournamentReducer from "../reducers/tournamentReducer"
 import TournamentContainer from "./TournamentContainer";
 import UserHeader from "../components/playerDashboard/header";
 import playerGrid from "../components/playerDashboard/grid";
+import roundReducer from "../reducers/roundReducer";
+import {Provider} from "react-redux";
 
-
-
-const rootReducer = combineReducers({
-                                        userReducer: userReducer,
-                                        tournamentReducer: tournamentReducer
-                                    });
-
-const store = createStore(rootReducer);
 
 
 class UserContainer extends React.Component
@@ -22,6 +16,7 @@ class UserContainer extends React.Component
     render()
     {
         return(
+
             <div>
 
                 <UserHeader/>
@@ -65,7 +60,7 @@ class UserContainer extends React.Component
                 />
 
                 <Route
-                    path = "/user/:userid/tournament/123"
+                    path = "/user/:userid/tournament/:tid"
                     render = {
                         () =>
                             <div>
@@ -74,6 +69,7 @@ class UserContainer extends React.Component
                     }
                 />
             </div>
+
         )
     }
 }

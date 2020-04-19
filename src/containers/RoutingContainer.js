@@ -2,20 +2,17 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import Login from "../components/login/login";
 import Register from "../components/register/register";
-import Dashboard from "../components/playerDashboard/dashboard";
 import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import userReducer from "../reducers/userReducer"
 import tournamentReducer from "../reducers/tournamentReducer"
-import Header from "../components/playerDashboard/header";
-import Demo from "../components/chessboard/chessboard";
-import Switch from "react-router-dom/es/Switch";
 import UserContainer from "./UserContainer";
-import TournamentContainer from "./TournamentContainer";
+import roundReducer from "../reducers/roundReducer";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
-    tournamentReducer: tournamentReducer
+    tournamentReducer: tournamentReducer,
+    roundReducer : roundReducer
 });
 
 const store = createStore(rootReducer);
@@ -27,9 +24,9 @@ class RoutingContainer extends React.Component
     {
         return(
             <div className={"container-fluid m-0 p-0"}>
-                <Provider store={store}>
-                <Router>
 
+                <Router>
+                    <Provider store={store}>
                     <Route
                         exact path = "/login"
                         render = {
@@ -60,11 +57,8 @@ class RoutingContainer extends React.Component
                                 </div>
                         }
                     />
-
+                    </Provider>
                 </Router>
-                </Provider>
-
-
             </div>
         )
 

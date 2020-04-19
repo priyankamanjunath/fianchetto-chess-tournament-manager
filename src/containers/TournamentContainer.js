@@ -4,7 +4,7 @@ import {Route} from "react-router-dom";
 import HeaderTournamentDashboard from "../components/tournamentDashboard/header";
 import PairingTableView from "../components/tournamentDashboard/PairingTable/pairingTableView";
 import TournamentInfo from "../components/tournamentDashboard/TournamentInfo/tournamentInfo";
-
+import PairingContainer from "./PairingContainer";
 
 class TournamentContainer extends React.Component
 {
@@ -13,6 +13,7 @@ class TournamentContainer extends React.Component
         return(
 
             <div>
+
                 <HeaderTournamentDashboard/>
                 <Route
                     path = "/user/123/tournament/123/home"
@@ -42,17 +43,23 @@ class TournamentContainer extends React.Component
                     }
                 />
                 <Route
-                    path = "/user/:userid/tournament/:tournamentid/pairings"
+                    path = "/user/:userid/tournament/:tid/pairings"
                     render = {
-                        () =>
+                        (props) =>
                             <div>
-                                <PairingTableView/>
+
+                                <PairingContainer
+                                    userid = {props.match.params.userid}
+                                    tid = {props.match.params.tid}
+                                />
+
                             </div>
                     }
                 />
 
 
             </div>
+
         )
     }
 }
