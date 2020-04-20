@@ -32,7 +32,7 @@ class RoutingContainer extends React.Component
                         render = {
                             () =>
                                 <div>
-                                    <Login/>
+                                    <Login {...this.props} history={this.props.history}/>
                                 </div>
                         }
                     />

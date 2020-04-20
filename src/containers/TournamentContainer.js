@@ -16,7 +16,7 @@ class TournamentContainer extends React.Component
 
                 <HeaderTournamentDashboard/>
                 <Route
-                    path = "/user/123/tournament/123/home"
+                    path = "/user/:userId/tournament/123/home"
                     render = {
                         () =>
                             <div>

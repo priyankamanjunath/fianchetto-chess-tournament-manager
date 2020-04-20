@@ -1,5 +1,6 @@
 export const FIND_USER_INFO = "FIND_USER_INFO";
 export const CREATE_USER = "CREATE_USER";
+export const LOGIN = "LOGIN";
 export const findUserInfo = (userInfo) => {
     return {
         type: FIND_USER_INFO,
@@ -12,3 +13,7 @@ export const createUser = (newUserInfo) => ({
     module: newUserInfo
 })
 
+export const login = (UserInfo) => ({
+    type: LOGIN,
+    module: UserInfo
+})
