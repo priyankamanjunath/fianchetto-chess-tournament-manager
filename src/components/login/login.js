@@ -26,7 +26,7 @@ class Login extends Component {
 
         userService.login(userLogin).then(
             response => {
-                this.props.history.push(`/user/${response.id}/profile`);
+                this.props.history.push(`/user/${response.id}/home`);
             }
         )
 
