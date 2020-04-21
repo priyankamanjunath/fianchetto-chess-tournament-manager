@@ -26,10 +26,16 @@ export const findTournamentsForUser = async (userId) => {
     return await response.json()
 }
 
+export const findTournamentsLeftForUser = async (userId) => {
+    const response = await fetch(`${JPA_SERVER}/api/user/${userId}/tournamentsLeft`)
+    return await response.json()
+}
+
 
 export default {
     findTournamentInfo,
     createTournament,
     findAllTournaments,
     findTournamentsForUser,
+    findTournamentsLeftForUser
 }
