@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import tournamentService from "../../../services/tournamentService";
+import "./../../login/login.css";
 
 class CreateTournament extends Component {
     state = {
@@ -43,24 +44,27 @@ class CreateTournament extends Component {
 
     render() {
         return (
-            <div className="container">
-                <h1 className={"text-center"}>Create new Tournament</h1>
+            <div className="row background">
+                <div className = "col-sm-4"/>
+                
+                <div className = "col-sm-4">
+                    <h1 className={"text-center"}>Create new Tournament</h1>
 
-                <form>
-                    <div className="form-group row">
-                        <label htmlFor="Name" className="col-sm-2 col-form-label">
-                            Name
-                        </label>
-                        <div className="col-sm-10">
-                            <input className="form-control"
-                                   id="name"
+                    <form>
+                        <div className="form-group row">
+                            <label htmlFor="Name" className="col-sm-2 col-form-label text-white bg-dark   ">
+                                Name
+                            </label>
+                            <div className="col-sm-10">
+                                <input className="form-control"
+                                       id="name"
                                    onChange={this.handleTournamentNameChange}/>
 
                         </div>
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="location" className="col-sm-2 col-form-label">
+                        <label htmlFor="location" className="col-sm-2 col-form-label text-white bg-dark   ">
                             Location
                         </label>
                         <div className="col-sm-10">
@@ -72,7 +76,7 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="username" className="col-sm-2 col-form-label">
+                        <label htmlFor="username" className="col-sm-2 col-form-label text-white bg-dark   ">
                             Prize money
                         </label>
                         <div className="col-sm-10">
@@ -83,7 +87,7 @@ class CreateTournament extends Component {
 
 
                     <div className="form-group row">
-                        <label htmlFor="startDate" className="col-sm-2 col-form-label">
+                        <label htmlFor="startDate" className="col-sm-2 col-form-label text-white bg-dark ">
                             Start Date
                         </label>
                         <div className="col-sm-10">
@@ -94,7 +98,7 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="endDate" className="col-sm-2 col-form-label">
+                        <label htmlFor="endDate" className="col-sm-2 col-form-label text-white bg-dark   ">
                             End Date
                         </label>
                         <div className="col-sm-10">
@@ -106,7 +110,7 @@ class CreateTournament extends Component {
 
 
                     <div className="form-group row">
-                        <label className="col-sm-2 col-form-label"/>
+                        <label className="col-sm-2 col-form-label "/>
                         <div className="col-sm-10">
 
                             <button className="btn btn-primary btn-block wbdv-login"
@@ -116,7 +120,8 @@ class CreateTournament extends Component {
                         </div>
                     </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         )
 
