@@ -37,7 +37,7 @@ const generateJsonTuple = (tuple) => {
 }
 
 const generatePairings = (participants ,rounds, roundCount) => {
-    const swisspair = require('swiss-pairing/index.js')({
+    const swisspair = require('../swisspairing/swiss')({
         maxPerRound: 1
     });
 
