@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 class UserHeader extends React.Component {
     render() {
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
                 {/*<Link to={"/login"} className="btn btn-primary">*/}
                 {/*        <i className="fas fa fa-times text-white"/>*/}
                 {/*</Link>*/}
@@ -30,20 +30,17 @@ class UserHeader extends React.Component {
                             </Link>
                         </li>
 
-                        <li className="nav-item active">
-                            <Link className="nav-link" to={`settings`}>
-                                Settings
-                                <span className="sr-only">(current)</span>
-                            </Link>
-                        </li>
                         <li>
                             <Link to={`create`} className = "nav-link">
                                 Create New Tournament
                             </Link>
                         </li>
-
-
                     </ul>
+                    <div className="text-white ml-auto">
+                        <Link to={`/login`} className = "nav-link">
+                            <span className="text-white">Log out</span>
+                        </Link>
+                    </div>
                 </div>
             </nav>
         )
