@@ -1,8 +1,10 @@
-import {CREATE_ROUND, FIND_TOURNAMENT_ROUNDS, UPDATE_ROUND} from "../actions/pairingActions";
+import {CREATE_PAIRING, CREATE_ROUND, FIND_TOURNAMENT_ROUNDS, UPDATE_ROUND} from "../actions/pairingActions";
 
 
 const initialState = {
-    rounds: []
+    rounds: [],
+    matchesX : [],
+    roundsTable : []
 }
 
 const roundReducer = (state = initialState, action) => {
@@ -13,6 +15,13 @@ const roundReducer = (state = initialState, action) => {
             rounds : action.rounds
         }
     }
+    else if(action.type === "FIND_ROUNDS_MATCHES"){
+        return {
+            ...state,
+            matchesX : action.matches
+        }
+    }
+
     else if(action.type === CREATE_ROUND){
         return {
             ...state,
@@ -22,6 +31,18 @@ const roundReducer = (state = initialState, action) => {
             ]
         }
     }
+    else if(action.type === CREATE_PAIRING){
+        console.log(action.round)
+        return {
+            ...state,
+            roundsTable: [
+                ...state.roundsTable,
+                action.round
+            ]
+        }
+    }
+
+
     else if(action.type === UPDATE_ROUND){
         return {
             ...state,

@@ -31,6 +31,17 @@ class UserContainer extends React.Component
                     }
                 />
                 <Route
+                    path = "/user/:userid/home"
+                    render = {
+                        () =>
+                            <div>
+                                <h1>Profile</h1>
+                            </div>
+                    }
+                />
+
+
+                <Route
                     path = "/user/:userid/activity"
                     render = {
                         () =>

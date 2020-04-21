@@ -5,7 +5,8 @@ import openSocket from 'socket.io-client';
 import {NODE_SERVER} from "../constants/endpoints";
 
 const game = new Chess();
-const socket = openSocket(NODE_SERVER);
+// const socket = openSocket(NODE_SERVER);
+const socket = null;
 
 class HumanVsHuman extends Component {
     constructor(props){

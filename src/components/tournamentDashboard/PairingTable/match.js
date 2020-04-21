@@ -29,8 +29,9 @@ class Match extends React.Component {
         return (
 
             <tr>
-                <td>{this.props.match.white}</td>
-                <td>{this.props.match.black}</td>
+                <td>{this.props.match.home.name}</td>
+                <td>{this.props.match.away.name}</td>
+
                 <td>
                     <select
                         className="form-control"
@@ -39,15 +40,15 @@ class Match extends React.Component {
                             (e) => this.update(e)
                         }
                     >
-                        <option value={"WIN"}>White Wins</option>
-                        <option value={"LOSS"}>Black Wins</option>
-                        <option value={"DRAW"}>Draw</option>
-                        <option value={"NA"}>InProgress</option>
+                        <option value={1}>White Wins</option>
+                        <option value={-1}>Black Wins</option>
+                        <option value={0}>Draw</option>
+                        <option value={-9}>InProgress</option>
                     </select>
 
                 </td>
-                <td>{this.props.match.arbiter}</td>
-                <td>{this.props.match.id}</td>
+                {/*<td>{this.props.match.arbiter.name}</td>*/}
+                {/*<td>{this.props.match.id}</td>*/}
 
 
             </tr>

@@ -1,37 +1,59 @@
 import React from 'react';
 import Match from "./match";
 import {connect} from "react-redux";
-import {getMatchups} from "swiss-pairing";
+import {
+    createRoundService, findAllMatchesForRoundService, findAllMatchesForTournamentService,
+    findAllRoundsForTournamnetService,
+    findAllRoundsService,
+    updateRoundService
+} from "../../../services/roundService";
+import {
+    createRoundAction, findAllMatchesForRoundsAction,
+    findAllRoundsAction,
+    findAllRoundsForTournamnetAction,
+    updateRoundAction
+} from "../../../actions/pairingActions";
 
-const stateToPropertyMapper = (state) => {
 
+const dispatchToPropertyMapper = (dispatch) => {
     return {
-        rounds: state.roundReducer.rounds,
+        findAllMatchesForRound : (roundid) => {
+
+            findAllMatchesForRoundService(roundid)
+                .then(matches =>
+                    {
+                        dispatch(findAllMatchesForRoundsAction(matches))
+                    }
+                )
+        }
 
     }
 }
 
-const pairL = require("swiss-pairing")
+const stateToPropertyMapper = (state) => {
+
+    return {
+        matches: state.roundReducer.matchesX,
+    }
+}
+
+const pairL = require("swiss-pairing/index.js")
 
 class PairingTableView extends React.Component {
 
 
-    constructor(props) {
-        super(props);
-    }
 
-    state = {
-        round : []
-
-    }
 
     componentDidMount() {
-        this.setState({
-            round : this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0]
-        })
+        this.props.findAllMatchesForRound(this.props.roundid)
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        if(this.props.roundid !== prevProps.roundid) {
+            this.props.findAllMatchesForRound(this.props.roundid)
+        }
 
+    }
 
     updateRound = (id, value) => {
         const roundMod = this.props.rounds.filter(rounds => rounds._id === this.props.roundid)[0];
@@ -58,19 +80,18 @@ class PairingTableView extends React.Component {
                             <button
                                 className={"btn btn-info"}
                                 onClick={() =>
-                                    this.props.updateRoundDispatcher(this.props.roundid, this.state.round)
+                                    console.log("clicked")
+
                                 }>
-
-
                                 Save Changes
                             </button>
                         </div>
                         <div>
                             <button
                                 className={"btn btn-info"}
-                                onClick={() =>
-                                  // console.log("hello")
-                                    getMatchups()
+                                onClick={() => {
+
+                                }
                                 }>
 
                                 Click me
@@ -88,16 +109,13 @@ class PairingTableView extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
+
+
                         {
-                            this.props.rounds.length !== 0  &&
-                            this.props.rounds
-                                .filter(rounds => rounds._id === this.props.roundid)[0].matchList
-                                .map(function (match, index) {
+                            this.props.matches.map(function (match, index) {
                                 return <Match
                                     key={index}
                                     match = {match}
-                                    updateRound = {this.updateRound}
-
                                 />
                             }, this)
                         }
@@ -111,4 +129,4 @@ class PairingTableView extends React.Component {
 }
 
 // export default PairingTableView
-export default connect(stateToPropertyMapper, "")(PairingTableView)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(PairingTableView)
