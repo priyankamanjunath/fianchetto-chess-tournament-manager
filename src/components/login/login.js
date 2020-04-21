@@ -83,8 +83,8 @@ class Login extends Component {
                             </div>
 
                             <div className="form-group row">
-                                <label className="col-sm-2 col-form-label"/>
-                                <div className="col-sm-10">
+                                <label className="col-sm-3 col-form-label"/>
+                                <div className="col-sm-9">
                                     <Link to={"/login"}>
                                         <button onClick={this.submitLogin}
                                                 className="btn btn-primary btn-block wbdv-login">Sign
