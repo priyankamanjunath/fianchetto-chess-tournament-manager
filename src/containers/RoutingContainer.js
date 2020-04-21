@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
+import { Router } from 'react-router';
+import { Route } from 'react-router-dom';
 import Login from "../components/login/login";
 import Register from "../components/register/register";
 import {createStore, combineReducers} from 'redux'
@@ -24,16 +25,14 @@ class RoutingContainer extends React.Component
     {
         return(
             <div className={"container-fluid m-0 p-0"}>
-
-                <Router>
+                <Router history={this.props.history}>
                     <Provider store={store}>
                     <Route
                         exact path = "/login"
                         render = {
                             () =>
-                                <div>
-                                    <Login {...this.props} history={this.props.history}/>
-                                </div>
+                                <Login {...this.props} />
+
                         }
                     />
 

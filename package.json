@@ -18,7 +18,8 @@
     "socket.io": "^2.3.0",
     "socket.io-client": "1.7.0",
     "swiss-pairing": "^1.3.0",
-    "history": "latest"
+    "history": "latest",
+    "react-router": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

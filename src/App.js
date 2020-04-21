@@ -1,8 +1,8 @@
 import React from 'react';
-import createHistory from 'history/createBrowserHistory';
 import RoutingContainer from "./containers/RoutingContainer";
+import {createBrowserHistory} from "history";
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 function App() {
   return (
