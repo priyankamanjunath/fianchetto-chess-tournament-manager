@@ -10,6 +10,7 @@ import tournamentReducer from "../reducers/tournamentReducer"
 import UserContainer from "./UserContainer";
 import roundReducer from "../reducers/roundReducer";
 import PrivacyPolicy from "../components/privacy-policy/privacy-policy";
+import {HomePageComponent} from "../components/homePage";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -28,6 +29,17 @@ class RoutingContainer extends React.Component
             <div className={"container-fluid m-0 p-0"}>
                 <Router history={this.props.history}>
                     <Provider store={store}>
+
+                    <Route
+                        exact path = "/"
+                        render = {
+                            () =>
+                                <HomePageComponent/>
+
+                        }
+                    />
+
+
                     <Route
                         exact path = "/"
                         render = {

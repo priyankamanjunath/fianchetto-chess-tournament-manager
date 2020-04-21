@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom";
-import {findAllTournaments} from "../../services/tournamentService"
+import {findAllTournaments, findTournamentsLeftForUser} from "../../services/tournamentService"
 import {findTournamentsForUser} from "../../services/tournamentService"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -17,30 +17,12 @@ class UserHome extends React.Component {
     }
 
     componentDidMount(): void {
-        findAllTournaments().
-        then(res => {
-            if(res.length === 0)
-                return;
-            let allTournaments = res;
-            findTournamentsForUser(this.props.userId).then(res => {
-                let myTournaments = res;
-                let newMatches = []
-                allTournaments.forEach(t1 => {
-                    let f = 0
-                    myTournaments.forEach(t2 => {
-                        if(t1.id === t2.id){
-                            f = 1
-                        }
-                    })
-                    if(f === 0){
-                        newMatches.push(t1)
-                    }
-                })
+        findTournamentsLeftForUser(this.props.userId)
+            .then(newMatches => {
                 this.setState({
-                                  newMatches: newMatches
-                              })
+                    newMatches: newMatches
+                })
             })
-        })
     }
 
     participate = (tId, tName) => {

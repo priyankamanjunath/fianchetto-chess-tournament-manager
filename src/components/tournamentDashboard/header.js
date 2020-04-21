@@ -1,15 +1,20 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {findTournamentInfo} from "../../services/tournamentService";
 
 
 class HeaderTournamentDashboard extends React.Component {
 
     state = {
-
+        tournament: {}
     }
 
 
     componentDidMount() {
+        findTournamentInfo(this.props.tournamentId)
+            .then(tournament => this.setState({
+                tournament: tournament
+            }))
     }
 
     render() {
@@ -28,31 +33,32 @@ class HeaderTournamentDashboard extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ">
                         <li className="nav-item active">
-                            <Link className="nav-link" to={`/user/${this.props.userId}/home`}>Home</Link>
+                            <Link className="nav-link" to={`/user/${this.props.userId}/tournament/${this.props.tournamentId}/home`}>Home</Link>
                         </li>
 
 
-                        <li className="nav-item active">
-                            <Link className="nav-link" to={`/user/${this.props.userId}/tournament/${this.props.tournamentId}/mymatches`}>
-                                My Matches
-                            </Link>
-                        </li>
+                        {
+                            this.state.tournament.master &&
+                            this.state.tournament.master.id != this.props.userId &&
+                            <li className="nav-item active">
+                                <Link className="nav-link"
+                                      to={`/user/${this.props.userId}/tournament/${this.props.tournamentId}/mymatches`}>
+                                    My Matches
+                                </Link>
+                            </li>
+                        }
 
-                        <li className="nav-item active">
+                       {
+                           this.state.tournament.master &&
+                           this.state.tournament.master.id == this.props.userId &&
+                           <li className="nav-item active">
                             <Link className="nav-link" to={"pairings"}>
                                 Round Pairings
                                 {/*<a className="nav-link" href="#">Round Pairings<span className="sr-only">(current)</span></a>*/}
                             </Link>
                             {/*<a className="nav-link" href="#">Round Pairings<span className="sr-only">(current)</span></a>*/}
                         </li>
-
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Result Entry<span className="sr-only">(current)</span></a>
-                        </li>
-
-                        <li className="nav-item  active   ">
-                            <a className="nav-link " href="#">Settings<span className="sr-only">(current)</span></a>
-                        </li>
+                       }
 
                     </ul>
                 </div>

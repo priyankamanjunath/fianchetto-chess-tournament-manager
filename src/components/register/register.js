@@ -123,7 +123,17 @@ class Register extends Component {
                                 </div>
                                 <div className="col-sm-1"/>
                             </div>
-
+                            <div className="form-group row">
+                                <div className={"col-sm-2"}/>
+                                <div className={"col-sm-10"}>
+                                    <div className="text-center">
+                                        <Link to={"/login"}>
+                                            <a className="">
+                                                Login </a>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
