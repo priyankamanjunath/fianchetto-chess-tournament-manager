@@ -100,6 +100,11 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>
+                <div className = "privacy-policy">
+                    <Link to={"/privacy-policy"}>
+                        Privacy Policy
+                    </Link>
+                </div>
             </div>
         )
     }

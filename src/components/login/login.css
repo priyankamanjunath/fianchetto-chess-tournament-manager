@@ -29,6 +29,6 @@
     left: 0
 }
 
-input {
-    background-color: gray;
+.privacy-policy {
+    position: absolute; bottom: 15px; left: 0; width: 100%; text-align: center
 }

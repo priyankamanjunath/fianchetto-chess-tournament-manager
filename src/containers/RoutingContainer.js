@@ -9,6 +9,7 @@ import userReducer from "../reducers/userReducer"
 import tournamentReducer from "../reducers/tournamentReducer"
 import UserContainer from "./UserContainer";
 import roundReducer from "../reducers/roundReducer";
+import PrivacyPolicy from "../components/privacy-policy/privacy-policy";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -53,6 +54,15 @@ class RoutingContainer extends React.Component
                             () =>
                                 <div>
                                     <UserContainer/>
+                                </div>
+                        }
+                    />
+                    <Route
+                        path = "/privacy-policy"
+                        render = {
+                            () =>
+                                <div>
+                                    <PrivacyPolicy/>
                                 </div>
                         }
                     />

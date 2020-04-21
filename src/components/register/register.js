@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import userService from "../../services/userService";
 import "./../login/login.css"
+import {Link} from "react-router-dom";
 
 class Register extends Component {
     state = {
@@ -113,6 +114,11 @@ class Register extends Component {
 
                         </form>
                     </div>
+                </div>
+                <div className = "privacy-policy">
+                    <Link to={"/privacy-policy"}>
+                        Privacy Policy
+                    </Link>
                 </div>
             </div>
         )
