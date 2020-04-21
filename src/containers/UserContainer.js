@@ -1,17 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
-import {createStore, combineReducers} from 'redux'
-import userReducer from "../reducers/userReducer"
-import tournamentReducer from "../reducers/tournamentReducer"
+import {Route} from "react-router-dom";
 import TournamentContainer from "./TournamentContainer";
 import UserHeader from "../components/playerDashboard/header";
 import PlayerDashboard from "../components/playerDashboard/dashboard";
-import roundReducer from "../reducers/roundReducer";
-import {Provider} from "react-redux";
 import UserHome from "../components/playerDashboard/home";
 import CreateTournament from "../components/tournamentDashboard/createTournament/createTournament";
-
-
+import Profile from "../components/profile/profile";
 
 class UserContainer extends React.Component
 {
@@ -48,17 +42,17 @@ class UserContainer extends React.Component
                 }
 
                 <Route
-                    path = "/user/:userid/profile"
-                    render = {
-                        () =>
-                            <div>
-                                <h1>Profile</h1>
-                            </div>
+                    path="/user/:userId/profile"
+                    render={(props) =>
+                        <div>
+                            <Profile
+                                userId={props.match.params.userId}/>
+                        </div>
                     }
                 />
                 <Route
-                    path = "/user/:userId/home"
-                    render = {
+                    path="/user/:userId/home"
+                    render={
                         (props) =>
                             <UserHome
                                 userId = {props.match.params.userId}
@@ -76,15 +70,7 @@ class UserContainer extends React.Component
                             </div>
                     }
                 />
-                <Route
-                    path = "/user/:userid/settings"
-                    render = {
-                        () =>
-                            <div>
-                                <h1>Settings</h1>
-                            </div>
-                    }
-                />
+
                 <Route
                     path = "/user/:userId/create"
                     render = {

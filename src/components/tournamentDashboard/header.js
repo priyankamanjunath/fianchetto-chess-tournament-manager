@@ -19,8 +19,8 @@ class HeaderTournamentDashboard extends React.Component {
 
     render() {
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-                <Link className="btn btn-primary text-white" to={`/user/${this.props.userId}/dashboard`}>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+                <Link className="btn btn-dark text-white" to={`/user/${this.props.userId}/dashboard`}>
                     {/*<a className="btn btn-primary text-white">*/}
                         <i className="fas fa fa-times"/>
                     {/*</a>*/}
@@ -61,6 +61,11 @@ class HeaderTournamentDashboard extends React.Component {
                        }
 
                     </ul>
+                    <div className="text-white ml-auto">
+                        <Link to={`/user/${this.props.userId}/dashboard`} className = "nav-link">
+                            <span className="text-white">Exit Tournament</span>
+                        </Link>
+                    </div>
                 </div>
             </nav>
         )
