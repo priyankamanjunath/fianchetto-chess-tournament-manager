@@ -72,7 +72,7 @@ class HumanVsHuman extends Component {
     check_game_state = (player) => {
         let winner = ""
         let over = ""
-        if(!game.game_over()){
+        if(game.game_over()){
             over = true
             winner = player
             this.end_game(winner)
