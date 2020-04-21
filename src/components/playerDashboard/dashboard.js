@@ -1,11 +1,10 @@
 import React from "react";
-import Header from "./header";
 import {connect} from "react-redux";
-import userService from "../../services/userService";
-import {findUserInfo} from "../../actions/userActions";
+import {findTournamentsForUser} from "../../actions/userActions"
 import GridItem from "./gridItem";
+import tournamentService from "../../services/tournamentService";
 
-class playerDashboard extends React.Component {
+class PlayerActivity extends React.Component {
 
     constructor(props){
         super(props);
@@ -20,13 +19,17 @@ class playerDashboard extends React.Component {
         this.props.findUserInfo(this.props.userId)
     }
 
-    render() {
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
 
+    }
+
+    render() {
         return (
             <div>
-                <Header/>
                 <div className={"container"}>
-                    <h3 className={"text-center"}>Active</h3>
+                    <br/>
+                    <h2 style={{color: "#5D6D7E"}}>Dashboard</h2>
+                    <h3 className={"text-center"}>Active Tournaments</h3>
                     <div className="border-top my-3"/>
                     <div className={"container col-11"}>
                         <div className={"row"}>
@@ -44,27 +47,23 @@ class playerDashboard extends React.Component {
                         </div>
                     </div>
 
-                    <h3 className={"text-center"}>Past</h3>
+                    <h3 className={"text-center"}>Past Tournaments</h3>
                     <div className="border-top my-3"/>
                     <div className={"container col-11"}>
                         <div className={"row"}>
                             {
                                 this.props.tournamentList.map
                                 (
-
                                     (item, index) => !item.inProgress &&
                                       <GridItem
                                           key = {index}
                                           userId = {this.props.userId}
                                           tournament = {item}
                                       />
-
                                 )
                             }
                         </div>
                     </div>
-
-
                 </div>
            </div>
        )
@@ -73,7 +72,7 @@ class playerDashboard extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        tournamentList: state.userReducer.userInfo.tournamentList
+        tournamentList: state.userReducer.userTournament
     }
 };
 
@@ -81,13 +80,15 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         findUserInfo: (userId) => {
-            userService.findUserInfo(userId)
-                .then(userInfo =>
-                          dispatch(findUserInfo(userInfo)))
-
+            tournamentService.findTournamentsForUser(userId)
+                .then(userTour =>
+                      {
+                          dispatch(findTournamentsForUser(userTour))
+                      }
+                )
         }
     }
 };
 
 
-export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(playerDashboard)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(PlayerActivity)

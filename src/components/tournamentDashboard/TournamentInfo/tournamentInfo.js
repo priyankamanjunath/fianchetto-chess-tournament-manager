@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 class TournamentInfo extends React.Component{
 
     state = {
-        image : "https://upload.wikimedia.org/wikipedia/commons/c/c4/Sahovska_olimpiada_Bled_2002_1.JPG"
+        image : "https://www.tatasteelchess.com/images/home/wijkaanzeemainevent34.jpg"
     }
 
     componentDidMount() {
@@ -18,9 +18,8 @@ class TournamentInfo extends React.Component{
         return(
             <div className="container p-2">
                 <div className="card">
-
-                    <img src={this.state.image} className="card-img-top" alt="..." height="500"
-                         width="42"/>
+                    <img src={this.state.image} className="card-img-top" alt="..." height="auto"
+                         width="50"/>
                     <div className="card-body">
 
                         <h5 className="card-title">{this.props.tournamentInfo.name}</h5>
@@ -32,9 +31,20 @@ class TournamentInfo extends React.Component{
                             {!this.props.tournamentInfo.inProgress && "No"}
                         </p>
                         <p>
-                            Started on: {this.props.tournamentInfo.startDate.substring(0,10)}
+                            {
+                                this.props.tournamentInfo.startDate &&
+                                <span>
+                                Started on: {this.props.tournamentInfo.startDate.substring(0,10)}
+                                </span>
+                            }
                             <br/>
-                            Ended on: {this.props.tournamentInfo.endDate.substring(0,10)}
+                            {
+                                this.props.tournamentInfo.endDate &&
+                                <span>
+                                Ended on: {this.props.tournamentInfo.endDate.substring(0,10)}
+                                </span>
+                            }
+                            <br/>
                         </p>
                         <p>
                             Prize: {this.props.tournamentInfo.prize}

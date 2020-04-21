@@ -5,21 +5,46 @@ import userReducer from "../reducers/userReducer"
 import tournamentReducer from "../reducers/tournamentReducer"
 import TournamentContainer from "./TournamentContainer";
 import UserHeader from "../components/playerDashboard/header";
-import playerGrid from "../components/playerDashboard/grid";
+import PlayerDashboard from "../components/playerDashboard/dashboard";
 import roundReducer from "../reducers/roundReducer";
 import {Provider} from "react-redux";
+import UserHome from "../components/playerDashboard/home";
 
 
 
 class UserContainer extends React.Component
 {
+    state = {
+        showHeader: true
+    }
+    componentDidMount(): void {
+        this.state = {
+            showHeader: true
+        }
+    }
+
+    hideUserHeader = () => {
+        this.setState({
+            showHeader: !this.state.showHeader
+                      })
+    }
+
     render()
     {
         return(
 
             <div>
-
-                <UserHeader/>
+                {
+                    this.state.showHeader &&
+                    <Route
+                        path="/user/:userId"
+                        render={(props) =>
+                            <UserHeader
+                                userId={props.match.params.userId}
+                            />
+                        }
+                    />
+                }
 
                 <Route
                     path = "/user/:userid/profile"
@@ -31,12 +56,22 @@ class UserContainer extends React.Component
                     }
                 />
                 <Route
-                    path = "/user/:userid/activity"
+                    path = "/user/:userId/home"
                     render = {
-                        () =>
+                        (props) =>
+                            <UserHome
+                                userId = {props.match.params.userId}
+                            />
+                    }
+                />
+                <Route
+                    path = "/user/:userid/dashboard"
+                    render = {
+                        (props) =>
                             <div>
-                                <h1>Activity</h1>
-                                <playerGrid/>
+                                <PlayerDashboard
+                                userId = {props.match.params.userid}
+                                    {...props}/>
                             </div>
                     }
                 />
@@ -62,9 +97,11 @@ class UserContainer extends React.Component
                 <Route
                     path = "/user/:userid/tournament/:tid"
                     render = {
-                        () =>
+                        (props) =>
                             <div>
-                                <TournamentContainer/>
+                                <TournamentContainer
+                                    hideUserHeader = {this.hideUserHeader}
+                                />
                             </div>
                     }
                 />

@@ -5,31 +5,55 @@ import HeaderTournamentDashboard from "../components/tournamentDashboard/header"
 import PairingTableView from "../components/tournamentDashboard/PairingTable/pairingTableView";
 import TournamentInfo from "../components/tournamentDashboard/TournamentInfo/tournamentInfo";
 import PairingContainer from "./PairingContainer";
+import FianchettoChessboard from "../components/chessboard/chessboard";
+import MyMatches from "../components/tournamentDashboard/MyMatches/MyMatches";
+
 
 class TournamentContainer extends React.Component
 {
+
+    componentDidMount(): void {
+        this.props.hideUserHeader()
+    }
+    componentWillUnmount(): void {
+        this.props.hideUserHeader()
+    }
+
     render()
     {
         return(
 
             <div>
-
-                <HeaderTournamentDashboard/>
                 <Route
-                    path = "/user/123/tournament/123/home"
+                    path = "/user/:uId/tournament/:tId/"
                     render = {
-                        () =>
+                        (props) =>
                             <div>
-                                <TournamentInfo/>
+                                <HeaderTournamentDashboard
+                                    userId = {props.match.params.uId}
+                                    tournamentId = {props.match.params.tId}/>
                             </div>
                     }
                 />
                 <Route
-                    path = "/user/123/tournament/123/mymatches"
+                    path = "/user/:uid/tournament/:tId/home"
                     render = {
-                        () =>
+                        (props) =>
                             <div>
-                                <h1>My Matches</h1>
+                                <TournamentInfo
+                                    tournamentId = {props.match.params.tId}/>
+                            </div>
+                    }
+                />
+                <Route
+                    path = "/user/:uId/tournament/:tId/mymatches"
+                    render = {
+                        (props) =>
+                            <div>
+                                <MyMatches
+                                    userId = {props.match.params.uId}
+                                    tournamentId = {props.match.params.tId}
+                                />
                             </div>
                     }
                 />
@@ -57,6 +81,18 @@ class TournamentContainer extends React.Component
                     }
                 />
 
+                <Route
+                    path = "/user/:uId/tournament/:tId/match/:matchId/play"
+                    render = {
+                        (props) =>
+                            <div>
+                                <FianchettoChessboard
+                                    userId = {props.match.params.uId}
+                                    matchId = {props.match.params.matchId}
+                                />
+                            </div>
+                    }
+                />
 
             </div>
 

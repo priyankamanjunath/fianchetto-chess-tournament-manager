@@ -4,7 +4,7 @@ import userService from "../../services/userService";
 import {findUserInfo} from "../../actions/userActions";
 import GridItem from "./gridItem";
 
-class playerGrid extends React.Component {
+class PlayerGrid extends React.Component {
 
     constructor(props){
         super(props);
@@ -86,4 +86,4 @@ const dispatchToPropertyMapper = (dispatch) => {
 };
 
 
-export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(playerGrid)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(PlayerGrid)

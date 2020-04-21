@@ -27,16 +27,14 @@ class HeaderTournamentDashboard extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ">
-                        <li className="nav-item active border">
-                            <a className="nav-link" href="#">Home<span className="sr-only">(current)</span></a>
+                        <li className="nav-item active">
+                            <Link className="nav-link" to={`/user/${this.props.userId}/home`}>Home</Link>
                         </li>
 
 
                         <li className="nav-item active">
-                            {/*<Link className="nav-link" to={`${this.props.tournamentId}/demo`}>*/}
-                            <Link className="nav-link" to={`/demo`}>
+                            <Link className="nav-link" to={`/user/${this.props.userId}/tournament/${this.props.tournamentId}/mymatches`}>
                                 My Matches
-                                {/*<a className="nav-link" href="#">My Matches<span className="sr-only">(current)</span></a>*/}
                             </Link>
                         </li>
 

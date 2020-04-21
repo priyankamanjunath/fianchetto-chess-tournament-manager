@@ -1,7 +1,8 @@
 
 import rounds from "./rounds"
-const url = "https://wbdv-generic-server.herokuapp.com/api/akshay"
+import {JPA_SERVER} from "../constants/endpoints";
 
+const url = "https://wbdv-generic-server.herokuapp.com/api/akshay"
 
 export const findAllRoundsService = () =>
     fetch(`${url}/rounds/`)
@@ -15,9 +16,9 @@ export const createRoundService = async (round) =>
         headers: {
             'content-type': 'application/json'
         }
-    })
+    });
     return await response.json()
-}
+};
 
 export const updateRoundService = async (roundid, round) => {
     const response = await fetch(`${url}/rounds/${roundid}`, {
@@ -26,6 +27,12 @@ export const updateRoundService = async (roundid, round) => {
         headers: {
             'content-type': 'application/json',
         }
-    })
+    });
+    return await response.json()
+};
+
+export const findRoundsByTournament = async (tournamentId) => {
+    const response = await fetch(`${JPA_SERVER}/api/tournament/${tournamentId}/rounds`);
     return await response.json()
 }
+

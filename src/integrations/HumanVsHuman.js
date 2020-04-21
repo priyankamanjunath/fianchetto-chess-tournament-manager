@@ -5,7 +5,8 @@ import openSocket from 'socket.io-client';
 import {NODE_SERVER} from "../constants/endpoints";
 
 const game = new Chess();
-const socket = openSocket(NODE_SERVER);
+// const socket = openSocket(NODE_SERVER);
+let socket = null;
 
 class HumanVsHuman extends Component {
     constructor(props){
@@ -14,7 +15,34 @@ class HumanVsHuman extends Component {
 
     static propTypes = {children: PropTypes.func};
 
-    state = {fen: "start", selectedSquares: [], myPosition: {}, socket: null, color: null};
+    state = {
+        fen: "start",
+        selectedSquares: [],
+        myPosition: {},
+    };
+
+    componentDidMount() {
+        socket = openSocket(NODE_SERVER);
+        socket.on('users:getMove', data => this.updateBoard(data));
+        socket.on('restore_match', data => this.updateBoard(data));
+        socket.on('opponent_status', data => this.props.opponentStatus(data));
+    }
+
+    componentWillUnmount(): void {
+        socket.emit('show_offline', {matchId: this.props.matchId, player: this.props.color})
+        socket.disconnect()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.fen !== this.props.fen) {
+            this.setState({
+                              fen: this.props.fen
+                          })
+        }
+        if(prevProps.color !== this.props.color){
+            socket.emit('init_match', {matchId: this.props.matchId, player: this.props.color})
+        }
+    }
 
     updateBoard = (data) => {
         game.move({from: data.source, to: data.target, promotion: "q"});
@@ -25,68 +53,74 @@ class HumanVsHuman extends Component {
                                           selecedSquares: data.selectedSquares
                                       })
                       })
+        this.props.toggleTurn(game.turn());
+        this.check_game_state(data.sender);
     };
 
-    componentDidMount() {
-        this.setState({
-                          socket: socket
-                      })
-        socket.on('users:get', data => this.updateBoard(data));
-        this.setState(prevState =>{
-            prevState.color= this.props.color
-            return prevState
-        })
+    end_game = (winner) => {
+        this.props.toggleDrag(false)
+        if (winner === 'w'){
+            alert("GAME OVER: White Player Wins")
+        }else if(winner === 'b'){
+            alert("GAME OVER: Black Player Wins")
+        }else {
+            alert("Game DRAW")
+        }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.fen !== this.props.fen) {
-            this.setState({
-                              fen: this.props.fen
-                          })
+    check_game_state = (player) => {
+        let winner = ""
+        let over = ""
+        if(game.game_over()){
+            over = true
+            winner = player
+            this.end_game(winner)
         }
-        if (prevState.color !== this.props.color){
-            this.setState({
-                color: this.props.color
-            })
+        if(game.in_draw()){
+            over = true
+            winner = "d"
+            this.end_game(winner)
+        }
+        return {
+            over: over,
+            winner: winner,
         }
     }
+
+
     removeHighlightSquare = () => {
         this.setState({selectedSquares: []});
     };
 
-    highlightSquare = (sourceSquare, squares = []) => {
-        this.setState(() => ({
-            selectedSquares: [sourceSquare, ...squares]
-        }));
-    };
-
-    getPosition = position => this.setState({myPosition: position});
-
     onDrop = (source, target) => {
-        if(game.turn() === this.state.color) {
+        if(game.turn() === this.props.color) {
             this.removeHighlightSquare();
             // see if the move is legal
             var move = game.move({from: source, to: target, promotion: "q"});
-            console.log("move: ", move);
             // illegal move
             if (move === null) {
                 return;
             }
+            // toggle turn
+            this.props.toggleTurn(game.turn());
+
             this.setState({fen: game.fen()});
+            let receipent = this.props.color === 'w' ? 'b' : 'w';
+
             let message = {
                 fen: this.state.fen,
-                selectedSquares: this.state.selectedSquares,
-                myPosition: this.state.myPosition,
                 source: source,
                 target: target,
-                color: this.state.color
+                sender: this.props.color,
+                recipient: receipent,
+                matchId: this.props.matchId,
+                game_stats: this.check_game_state(this.props.color)
             }
-            this.state.socket.emit("message:send", message);
+            socket.emit("message:sendMove", message);
         }
     };
 
     onMouseOverSquare = square => {
-        // get list of possible moves for this square
         var moves = game.moves({
                                    square: square,
                                    verbose: true
