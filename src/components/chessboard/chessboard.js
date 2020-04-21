@@ -79,9 +79,9 @@ class FianchettoChessboard extends Component {
             <div style={boardsContainer}>
                 {
                     this.state.color === 'w' &&
-                    <h4 style={{color: "#C3C3C3", padding:"0 40px 0 0"}}>You Are White</h4> ||
+                    <span style={{"font-weight": "600", "font-size": "28px", color: "#C3C3C3", padding:"0 40px 0 0"}}>You Are White</span> ||
                     this.state.color === 'b' &&
-                    <h4 style={{color: "#C3C3C3", padding:"0 40px 0 0"}}>You Are Black</h4>
+                    <span style={{"font-weight": "600", "font-size": "28px", color: "#C3C3C3", padding:"0 40px 0 0"}}>You Are Black</span>
                 }
                 {
                     this.state.validMatch &&
@@ -119,12 +119,14 @@ class FianchettoChessboard extends Component {
                 {
                     this.state.validMatch &&
                     this.state.turn === this.state.color &&
-                     <h4 style={{color: "#839192", padding: "0 0 0 40px"}}>Now It's Your
-                         Turn</h4> ||
+                     <h4 style={{"font-weight": "600", "font-size": "20px", color: "#839192", padding: "0 0 0 40px"}}>
+                        <u>Now It's Your Turn</u>
+                     </h4> ||
                     this.state.validMatch &&
                     this.state.turn !== this.state.color &&
-                    <h4 style={{color: "#839192", padding: "0 0 0 40px"}}>Other Player's
-                         Turn</h4>
+                    <h4 style={{"font-weight": "600", "font-size": "20px", color: "#839192", padding: "0 0 0 40px"}}>
+                        Other Player's Turn
+                    </h4>
 
                 }
                 {

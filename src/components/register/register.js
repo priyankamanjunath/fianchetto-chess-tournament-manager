@@ -105,7 +105,7 @@ class Register extends Component {
                                 <div className="col-sm-9">
 
                                     <button className="btn btn-primary btn-block wbdv-login"
-                                            onClick={this.submitNewUser()}>Register
+                                            onClick={() => this.submitNewUser()}>Register
                                     </button>
 
                                 </div>

@@ -51,15 +51,16 @@ class MyMatches extends React.Component {
                                                          <img className="card-img-top" src="https://images.chesscomfiles.com/uploads/v1/article/25126.7ba343a5.1200x674o.34772f7f578c.jpeg"
                                                               alt="Card image cap" />
                                                              <div className="card-body">
-                                                                 <h5 className="card-title">{match.round.name}</h5>
+                                                                 <h3 className="card-title"><b>{match.round.name}</b></h3>
                                                                  <p className="card-text">Opponent: &nbsp;
                                                                      <b>{parseInt(this.props.userId) === match.home.id ? match.away.name : match.home.name}</b>
                                                                  </p>
                                                                  <p className="card-text">Arbiter: &nbsp;
-                                                                     <b>{match.arbiter.name}</b>
+                                                                     <b>None</b>
                                                                  </p>
+                                                                 <br/>
                                                                  <Link to={`/user/${this.props.userId}/tournament/${this.props.tournamentId}/match/${match.id}/play`}
-                                                                    className="btn btn-primary">Play Online
+                                                                    className="col btn btn-primary">Play Online
                                                                  </Link>
                                                              </div>
                                                      </div>

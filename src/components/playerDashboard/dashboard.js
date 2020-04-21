@@ -9,9 +9,8 @@ class PlayerActivity extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            userInfo: {
-                tournamentList: []
-            }
+            userInfo: {},
+            tournamentList: {},
         }
     }
 
@@ -71,6 +70,7 @@ class PlayerActivity extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => {
+    console.log(state)
     return {
         tournamentList: state.userReducer.userTournament
     }

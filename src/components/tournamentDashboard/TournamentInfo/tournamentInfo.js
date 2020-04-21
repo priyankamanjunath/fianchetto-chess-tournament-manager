@@ -22,7 +22,7 @@ class TournamentInfo extends React.Component{
                          width="50"/>
                     <div className="card-body">
 
-                        <h5 className="card-title">{this.props.tournamentInfo.name}</h5>
+                        <h2 className="card-title"><b><u>{this.props.tournamentInfo.name}</u></b></h2>
 
                         <p className="card-text">Location: {this.props.tournamentInfo.location}</p>
 

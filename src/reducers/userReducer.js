@@ -7,7 +7,9 @@ let userInfo = {
         password: "not_useful",
 };
 
-const userReducer = (state={userInfo: userInfo}, action) => {
+
+
+const userReducer = (state={userInfo: userInfo, userTournament: []}, action) => {
     let users;
     switch (action.type) {
         case FIND_USER_INFO:

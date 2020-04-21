@@ -43,18 +43,6 @@ class UserHome extends React.Component {
         })
     }
 
-    filterNewMatches = (obj) => {
-        let myMatches = []
-        obj.forEach(match => {
-            if (match.home.id === parseInt(this.props.userId) || match.away.id === parseInt(this.props.userId)){
-                myMatches.push(match)
-            }
-        })
-        this.setState({
-                          myMatches: myMatches
-                      })
-    }
-
     participate = (tId, tName) => {
         // alert(tId)
         let uId = this.props.userId;
@@ -75,7 +63,6 @@ class UserHome extends React.Component {
                                     'success'
                                 ).then(() => {
                                     registerForTournament(uId, tId).then(res =>{
-                                        console.log(res);
                                         window.location.reload(false);
                                     })
                                 })
