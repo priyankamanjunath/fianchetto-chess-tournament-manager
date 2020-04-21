@@ -26,6 +26,7 @@ class HumanVsHuman extends Component {
         socket.on('users:getMove', data => this.updateBoard(data));
         socket.on('restore_match', data => this.updateBoard(data));
         socket.on('opponent_status', data => this.props.opponentStatus(data));
+        socket.emit('init_match', {matchId: this.props.matchId, player: this.props.color})
     }
 
     componentWillUnmount(): void {
@@ -71,7 +72,7 @@ class HumanVsHuman extends Component {
     check_game_state = (player) => {
         let winner = ""
         let over = ""
-        if(game.game_over()){
+        if(!game.game_over()){
             over = true
             winner = player
             this.end_game(winner)

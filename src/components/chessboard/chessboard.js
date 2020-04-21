@@ -41,17 +41,20 @@ class FianchettoChessboard extends Component {
         res => {
             if(res.status)
                 return
-            this.setState({
-                                   validMatch: true,
-                               })
             // find color assigned to the userid
             if (String(res.home.id) === this.props.userId){
                 this.setState({
                                   color: "w",
+                                  validMatch: true,
                               })
             }else if (String(res.away.id) === this.props.userId) {
                 this.setState({
                                     color: "b",
+                                    validMatch: true,
+                              })
+            }else{
+                this.setState({
+                                  validMatch: false,
                               })
             }
         }
