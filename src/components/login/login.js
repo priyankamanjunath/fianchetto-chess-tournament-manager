@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import "./login.css"
 import {Link} from "react-router-dom";
 import userService from "../../services/userService";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
+const MySwal = withReactContent(Swal);
 
 class Login extends Component {
 
@@ -26,7 +30,18 @@ class Login extends Component {
 
         userService.login(userLogin).then(
             response => {
-                this.props.history.push(`/user/${response.id}/home`);
+                if(response.id !== -1){
+                    this.props.history.push(`/user/${response.id}/home`);
+                } else {
+                    // alert("Wrong email and Password");
+                    MySwal.fire({
+                                  icon: 'error',
+                                  title: 'Wrong Passwrod',
+                                  text: 'Your password and email do not match',
+                                  footer: 'Try again or Click on the Sign up link'
+                              })
+                }
+
             }
         )
 
@@ -85,9 +100,6 @@ class Login extends Component {
                             <div className="form-group row">
                                 <div className={"col-sm-2"}/>
                                 <div className={"col-sm-10"}>
-                                    <div className="text-center">
-                                        <a href="#" className="">Forgot Password?</a>
-                                    </div>
                                     <div className="text-center">
                                         <Link to={"/register"}>
                                             <a className="">
