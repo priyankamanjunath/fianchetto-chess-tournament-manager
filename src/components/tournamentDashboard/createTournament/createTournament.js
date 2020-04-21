@@ -52,22 +52,22 @@ class CreateTournament extends Component {
 
                     <form>
                         <div className="form-group row">
-                            <label htmlFor="Name" className="col-sm-2 col-form-label text-white bg-dark   ">
+                            <label htmlFor="Name" className="col-sm-3 col-form-label text-white">
                                 Name
                             </label>
-                            <div className="col-sm-10">
+                            <div className="col-sm-9">
                                 <input className="form-control"
-                                       id="name"
+                                       id="name" required={true}
                                    onChange={this.handleTournamentNameChange}/>
 
                         </div>
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="location" className="col-sm-2 col-form-label text-white bg-dark   ">
+                        <label htmlFor="location" className="col-sm-3 col-form-label text-white">
                             Location
                         </label>
-                        <div className="col-sm-10">
+                        <div className="col-sm-9">
                             <input className="form-control "
                                    id="location"
                                    onChange={this.handlTournamentLocationChange}/>
@@ -76,50 +76,60 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="username" className="col-sm-2 col-form-label text-white bg-dark   ">
+                        <label htmlFor="username" className="col-sm-3 col-form-label text-white">
                             Prize money
                         </label>
-                        <div className="col-sm-10">
+                        <div className="col-sm-9">
                             <input className="form-control" type="number"
-                                   id="prize" onChange={this.handlePrizeMoneyChange}/>
+                                   id="prize" required={true} onChange={this.handlePrizeMoneyChange}/>
                         </div>
                     </div>
 
 
                     <div className="form-group row">
-                        <label htmlFor="startDate" className="col-sm-2 col-form-label text-white bg-dark ">
+                        <label htmlFor="startDate" className="col-sm-3 col-form-label text-white">
                             Start Date
                         </label>
-                        <div className="col-sm-10">
+                        <div className="col-sm-9">
                             <input className="form-control" type="date"
-                                   id="startDate" onChange={this.handleStartDateChange}/>
+                                   id="startDate" defaultValue={new Date().getDate()} onChange={this.handleStartDateChange}/>
 
                         </div>
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="endDate" className="col-sm-2 col-form-label text-white bg-dark   ">
+                        <label htmlFor="endDate" className="col-sm-3 col-form-label text-white">
                             End Date
                         </label>
-                        <div className="col-sm-10">
+                        <div className="col-sm-9">
                             <input className="form-control" type="date"
                                    id="endDate" onChange={this.handleEndDateChange}/>
 
                         </div>
                     </div>
 
-
                     <div className="form-group row">
-                        <label className="col-sm-2 col-form-label "/>
-                        <div className="col-sm-10">
-
-                            <button className="btn btn-primary btn-block wbdv-login"
-                                    onClick={() => this.submitNewTournament}>Create New Tournament
-                            </button>
+                        <label htmlFor="endDate" className="col-sm-3 col-form-label text-white">
+                            Description
+                        </label>
+                        <div className="col-sm-9">
+                            <input className="form-control" type="text"
+                                   id="endDate" required={true} onChange={this.handleDescriptionChange}/>
 
                         </div>
                     </div>
 
+
+                    <div className="form-group row">
+                        <label className="col-sm-3 col-form-label "/>
+                        <div className="col-sm-9">
+
+                            <button className="btn btn-primary btn-block wbdv-login"
+                                    onClick={this.submitNewTournament}>Create New Tournament
+                            </button>
+
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
