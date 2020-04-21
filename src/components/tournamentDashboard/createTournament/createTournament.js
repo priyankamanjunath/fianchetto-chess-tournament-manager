@@ -62,10 +62,10 @@ class CreateTournament extends Component {
 
                     <form>
                         <div className="form-group row">
-                            <label htmlFor="Name" className="col-sm-3 col-form-label text-white">
+                            <label htmlFor="Name" className="col-sm-2 col-form-label text-white">
                                 Name
                             </label>
-                            <div className="col-sm-9">
+                            <div className="col-sm-10">
                                 <input className="form-control"
                                        id="name"
                                    onChange={this.handleTournamentNameChange} required/>
@@ -73,10 +73,10 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="location" className="col-sm-3 col-form-label text-white">
+                        <label htmlFor="location" className="col-sm-2 col-form-label text-white">
                             Location
                         </label>
-                        <div className="col-sm-9">
+                        <div className="col-sm-10">
                             <input className="form-control "
                                    id="location"
                                    onChange={this.handlTournamentLocationChange} required/>
@@ -84,7 +84,7 @@ class CreateTournament extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="description" className="col-sm-2 col-form-label text-white bg-dark   ">
+                        <label htmlFor="description" className="col-sm-2 col-form-label text-white">
                             Description
                         </label>
                         <div className="col-sm-10">
@@ -95,10 +95,10 @@ class CreateTournament extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="username" className="col-sm-3 col-form-label text-white">
+                        <label htmlFor="username" className="col-sm-2 col-form-label text-white">
                             Prize money
                         </label>
-                        <div className="col-sm-9">
+                        <div className="col-sm-10">
                             <input className="form-control" type="number"
                                    id="prize" onChange={this.handlePrizeMoneyChange} required/>
                         </div>
@@ -106,10 +106,10 @@ class CreateTournament extends Component {
 
 
                     <div className="form-group row">
-                        <label htmlFor="startDate" className="col-sm-3 col-form-label text-white">
+                        <label htmlFor="startDate" className="col-sm-2 col-form-label text-white">
                             Start Date
                         </label>
-                        <div className="col-sm-9">
+                        <div className="col-sm-10">
                             <input className="form-control" type="date"
                                    id="startDate" onChange={this.handleStartDateChange} required/>
 
@@ -117,10 +117,10 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="endDate" className="col-sm-3 col-form-label text-white">
+                        <label htmlFor="endDate" className="col-sm-2 col-form-label text-white">
                             End Date
                         </label>
-                        <div className="col-sm-9">
+                        <div className="col-sm-10">
                             <input className="form-control" type="date"
                                    id="endDate" onChange={this.handleEndDateChange} required/>
 
@@ -128,10 +128,10 @@ class CreateTournament extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="endDate" className="col-sm-3 col-form-label text-white">
+                        <label htmlFor="endDate" className="col-sm-2 col-form-label text-white">
                             Description
                         </label>
-                        <div className="col-sm-9">
+                        <div className="col-sm-10">
                             <input className="form-control" type="text"
                                    id="endDate" required={true} onChange={this.handleDescriptionChange}/>
 
@@ -140,8 +140,8 @@ class CreateTournament extends Component {
 
 
                     <div className="form-group row">
-                        <label className="col-sm-3 col-form-label "/>
-                        <div className="col-sm-9">
+                        <label className="col-sm-2 col-form-label "/>
+                        <div className="col-sm-10">
 
                             <button className="btn btn-primary btn-block wbdv-login"
                                     onClick={(e) => this.submitNewTournament(e)}>Create New Tournament
