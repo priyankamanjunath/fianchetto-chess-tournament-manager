@@ -2,6 +2,7 @@ import React from "react";
 import {findTournamentInfo} from "../../../actions/tournamentActions";
 import tournamentService from "../../../services/tournamentService"
 import {connect} from "react-redux";
+import {Redirect} from "react-router";
 
 class TournamentInfo extends React.Component{
 
@@ -15,6 +16,11 @@ class TournamentInfo extends React.Component{
 
 
     render(){
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return(
             <div className="container p-2">
                 <div className="card">

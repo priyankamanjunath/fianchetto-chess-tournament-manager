@@ -36,11 +36,12 @@ class TournamentContainer extends React.Component
                     }
                 />
                 <Route
-                    path = "/user/:uid/tournament/:tId/home"
+                    path = "/user/:uId/tournament/:tId/home"
                     render = {
                         (props) =>
                             <div>
                                 <TournamentInfo
+                                    userId = {props.match.params.uId}
                                     tournamentId = {props.match.params.tId}/>
                             </div>
                     }

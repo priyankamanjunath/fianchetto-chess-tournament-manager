@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import tournamentService from "../../../services/tournamentService";
 import "./../../login/login.css";
+import {Redirect} from "react-router";
 
 class CreateTournament extends Component {
     state = {
@@ -53,6 +54,11 @@ class CreateTournament extends Component {
     };
 
     render() {
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return (
             <div className="row background">
                 <div className = "col-sm-3"/>
@@ -123,7 +129,6 @@ class CreateTournament extends Component {
                         <div className="col-sm-10">
                             <input className="form-control" type="date"
                                    id="endDate" onChange={this.handleEndDateChange} required/>
-
                         </div>
                     </div>
 
@@ -134,19 +139,15 @@ class CreateTournament extends Component {
                         <div className="col-sm-10">
                             <input className="form-control" type="text"
                                    id="endDate" required={true} onChange={this.handleDescriptionChange}/>
-
                         </div>
                     </div>
-
 
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label "/>
                         <div className="col-sm-10">
-
                             <button className="btn btn-primary btn-block wbdv-login"
                                     onClick={(e) => this.submitNewTournament(e)}>Create New Tournament
                             </button>
-
                         </div>
                     </div>
                     </form>

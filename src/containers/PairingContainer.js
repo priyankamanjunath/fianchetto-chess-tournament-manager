@@ -37,7 +37,7 @@ const generateJsonTuple = (tuple) => {
 }
 
 const generatePairings = (participants ,rounds, roundCount) => {
-    const swisspair = require('swiss-pairing/index.js')({
+    const swisspair = require('../swisspairing/swiss')({
         maxPerRound: 1
     });
 
@@ -126,6 +126,11 @@ class PairingContainer extends React.Component
 
     render()
     {
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return(
             <div>
                 <PairingHeader

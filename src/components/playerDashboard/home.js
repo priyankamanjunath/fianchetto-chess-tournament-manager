@@ -5,6 +5,7 @@ import {findTournamentsForUser} from "../../services/tournamentService"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {registerForTournament} from "../../services/userService";
+import {Redirect} from "react-router";
 
 const MySwal = withReactContent(Swal);
 
@@ -54,6 +55,11 @@ class UserHome extends React.Component {
     }
 
     render () {
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return (
             <div className={"container"}>
                 <br/>
