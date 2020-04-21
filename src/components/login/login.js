@@ -49,9 +49,9 @@ class Login extends Component {
                                     Email
                                 </label>
                                 <div className="col-sm-9">
-                                    <input className="form-control wbdv-field wbdv-username"
+                                    <input className="form-control wbdv-field wbdv-username bg-transparent text-white"
                                            id="username"
-                                           placeholder="Your User Name"
+                                           placeholder="email"
                                            onChange={this.handlEmailChange}/>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@ class Login extends Component {
                                        className="col-sm-3 col-form-label text-white">
                                     Password </label>
                                 <div className="col-sm-9">
-                                    <input type="password" className="form-control"
-                                           id="password" placeholder="123qwe#$%"
+                                    <input type="password" className="form-control bg-transparent text-white"
+                                           id="password" placeholder="password"
                                            onChange={this.handlePasswordChange}/>
                                 </div>
                             </div>
