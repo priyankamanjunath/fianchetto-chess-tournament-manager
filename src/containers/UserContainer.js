@@ -86,11 +86,14 @@ class UserContainer extends React.Component
                     }
                 />
                 <Route
-                    path = "/user/:userid/create"
+                    path = "/user/:userId/create"
                     render = {
-                        () =>
+                        (props) =>
                             <div>
-                               <CreateTournament/>
+                                <CreateTournament
+                                    userId = {props.match.params.userId}
+                                    {...props}
+                                />
                             </div>
                     }
                 />

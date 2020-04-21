@@ -41,6 +41,14 @@ class RoutingContainer extends React.Component
 
 
                     <Route
+                        exact path = "/"
+                        render = {
+                            () =>
+                                <Login {...this.props} />
+
+                        }
+                    />
+                    <Route
                         exact path = "/login"
                         render = {
                             () =>
@@ -52,9 +60,10 @@ class RoutingContainer extends React.Component
                     <Route
                         exact path = "/register"
                         render = {
-                            () =>
+                            (props) =>
                                 <div>
-                                    <Register/>
+                                    <Register
+                                        {...props}/>
                                 </div>
                         }
                     />
@@ -63,18 +72,20 @@ class RoutingContainer extends React.Component
                     <Route
                         path = "/user/:userid/"
                         render = {
-                            () =>
+                            (props) =>
                                 <div>
-                                    <UserContainer/>
+                                    <UserContainer
+                                        {...props}/>
                                 </div>
                         }
                     />
                     <Route
                         path = "/privacy-policy"
                         render = {
-                            () =>
+                            (props) =>
                                 <div>
-                                    <PrivacyPolicy/>
+                                    <PrivacyPolicy
+                                        {...props}/>
                                 </div>
                         }
                     />

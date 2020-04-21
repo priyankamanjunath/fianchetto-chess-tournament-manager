@@ -4,13 +4,14 @@ export const findTournamentInfo = (tournamentId) =>
     fetch(`${JPA_SERVER}/api/tournament/${tournamentId}`)
         .then(response => response.json());
 
-export const createTournament = async (tournamentInfo) => {
-    const response = await fetch(`${JPA_SERVER}/api/tournaments`, {
+export const createTournament = async (userId, tournamentInfo) => {
+    const response = await fetch(`${JPA_SERVER}/api/user/${userId}/tournaments`, {
         method: "POST",
         body: JSON.stringify(tournamentInfo),
         headers: {
             'content-type': 'application/json'
-        }
+        },
+        withCredentials: true
     })
 
     return await response.json()

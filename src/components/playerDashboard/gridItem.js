@@ -16,16 +16,16 @@ class GridItem extends React.Component{
         return(
             <div className="col-sm-6 col-md-4 col-lg-3 p-2">
                 <div className="card">
-                    <div className={'row'}>
-                    </div>
-                    <img src={this.state.image} className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">{this.props.tournament.name}</h5>
-                        <p className="card-text">{this.props.tournament.description}</p>
-                        <Link className={"col btn btn-primary"} to = {`/user/${this.props.userId}/tournament/${this.props.tournament.id}/home`}>
-                            Go to Tournament
-                        </Link>
+                    <div className={"row"}>
+                        <img src={this.state.image} className="card-img-top" alt="..."/>
+                        <div className="card-body">
+                            <h5 className="card-title">{this.props.tournament.name}</h5>
+                            <p className="card-text">{this.props.tournament.description}</p>
+                            <Link className={"col btn btn-primary"} to = {`/user/${this.props.userId}/tournament/${this.props.tournament.id}/home`}>
+                                Go to Tournament
+                            </Link>
 
+                        </div>
                     </div>
                 </div>
             </div>

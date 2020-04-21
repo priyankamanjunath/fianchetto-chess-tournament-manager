@@ -4,8 +4,20 @@ import PairingTableView from "../components/tournamentDashboard/PairingTable/pai
 import PairingHeader from "../components/tournamentDashboard/PairingTable/headerP";
 
 import {connect} from "react-redux";
-import {createRoundService, findAllRoundsService, updateRoundService} from "../services/roundService";
-import {createRoundAction, findAllRoundsAction, updateRoundAction} from "../actions/pairingActions";
+import {
+    createMatchesForRound,
+    createRoundService, findAllMatchesForTournamentService, findAllParticipantForTournamentService,
+    findAllRoundsForTournamnetService,
+    findAllRoundsService,
+    updateRoundService
+} from "../services/roundService";
+import {
+    createPairingAction,
+    createRoundAction,
+    findAllRoundsAction,
+    findAllRoundsForTournamnetAction,
+    updateRoundAction
+} from "../actions/pairingActions";
 
 const stateToPropertyMapper = (state) => {
 
@@ -14,10 +26,46 @@ const stateToPropertyMapper = (state) => {
     }
 }
 
+
+const generateJsonTuple = (tuple) => {
+
+    let val = {
+        "home" : {"id" : parseInt(tuple.home)},
+        "away" : {"id" : parseInt(tuple.away)}
+    }
+    return val
+}
+
+const generatePairings = (participants ,rounds, roundCount) => {
+    const swisspair = require('swiss-pairing/index.js')({
+        maxPerRound: 1
+    });
+
+    const dataMatchups = swisspair.getMatchups(roundCount, participants, rounds);
+
+    const round = []
+    for (let i in dataMatchups) {
+        let tuple = generateJsonTuple(dataMatchups[i])
+        console.log(tuple)
+        round.push(tuple)
+    }
+
+    return round;
+}
+
+const generateRoundName = (roundcount) => {
+    const name = "Round " + roundcount;
+    return {
+        "name" : name
+    }
+
+}
+
+
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        findAllRoundsDispatcher : () => {
-            findAllRoundsService()
+        findAllRoundsDispatcher : (tid) => {
+            findAllRoundsForTournamnetService(tid)
                 .then(rounds =>
                     {
                         dispatch(findAllRoundsAction(rounds))
@@ -25,17 +73,41 @@ const dispatchToPropertyMapper = (dispatch) => {
                 )
         },
 
-        createRoundDispatcher: (round) => {
-            createRoundService(round)
-                .then((round) => dispatch(createRoundAction(round)))
+        createRoundDispatcher: (tournamentid, roundCount) => {
+                findAllMatchesForTournamentService(tournamentid)
+                    .then(matches => {
+                        findAllParticipantForTournamentService(tournamentid)
+                            .then((participants) => {
+                                    generatePairings(participants, matches, roundCount)
+                                    createRoundService(tournamentid,generateRoundName(roundCount))
+                                        .then((round) =>{
+                                                dispatch(createRoundAction(round));
+                                                createMatchesForRound(round.id, generatePairings(participants, matches, roundCount))
+                                                    .then((pairing) =>
+                                                        dispatch(createPairingAction(pairing))
+                                                    )
+                                            }
+                                        )
+
+                                }
+                            )
+                    })
         },
 
         updateRoundDispatcher: (roundid, round) => {
             updateRoundService(roundid, round)
                 .then(status => dispatch(updateRoundAction(roundid, round)))
-        }
+        },
 
 
+        findAllRoundsForTournamentDispatcher : (tournamnetid) => {
+            findAllRoundsForTournamnetService(tournamnetid)
+                .then(rounds =>
+                    {
+                        dispatch(findAllRoundsForTournamnetAction(rounds))
+                    }
+                )
+        },
 
     }
 }
@@ -44,13 +116,11 @@ class PairingContainer extends React.Component
 {
 
     componentDidMount() {
-        this.props.findAllRoundsDispatcher()
+        this.props.findAllRoundsForTournamentDispatcher(this.props.tid);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.rounds !== this.props.rounds) {
-            // this.props.findAllRoundsDispatcher()
-        }
+
     }
 
 
@@ -59,10 +129,11 @@ class PairingContainer extends React.Component
         return(
             <div>
                 <PairingHeader
-                    rounds = {this.props.rounds}
+                    // rounds = {this.props.rounds}
                     userid = {this.props.userid}
                     tid = {this.props.tid}
                     createRoundDispatcher = {this.props.createRoundDispatcher}
+                    findAllRoundsDispatcher = {this.props.findAllRoundsDispatcher}
 
                 />
 
@@ -84,7 +155,7 @@ class PairingContainer extends React.Component
                         (props) =>
                             <div>
                                 <PairingTableView
-                                    rounds = {this.props.rounds}
+                                    // rounds = {this.props.rounds}
                                     roundid = {props.match.params.roundid}
                                     userid = {this.props.userid}
                                     tid = {this.props.tid}
