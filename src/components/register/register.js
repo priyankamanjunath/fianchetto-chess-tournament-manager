@@ -3,11 +3,17 @@ import userService from "../../services/userService";
 import "./../login/login.css"
 import {Link} from "react-router-dom";
 
+
 class Register extends Component {
+
+    constructor(props){
+        super(props)
+    }
+
     state = {
         newUsername: "",
         newUserPassword: "",
-        newUserEmail: ""
+        newUserEmail: "",
     };
 
     handleUsernameChange = e => {
@@ -22,14 +28,20 @@ class Register extends Component {
         this.setState({newUserPassword: e.target.value});
     };
 
-    submitNewUser = () => {
+    submitNewUser = async  (e) => {
+        e.preventDefault()
         const userToCreate = {
             name: this.state.newUsername,
             email: this.state.newUserEmail,
             password: this.state.newUserPassword
         };
 
-        userService.createUser(userToCreate).then();
+        const res = await userService.createUser(userToCreate);
+        if(res.id>0){
+            this.props.history.push({pathname: `/user/${res.id}/home`,})
+        }else{
+            alert("Invalid Details")
+        }
     };
 
     render() {
@@ -105,7 +117,7 @@ class Register extends Component {
                                 <div className="col-sm-9">
 
                                     <button className="btn btn-primary btn-block wbdv-login"
-                                            onClick={() => this.submitNewUser()}>Register
+                                            onClick={(e) => this.submitNewUser(e)}>Register
                                     </button>
 
                                 </div>

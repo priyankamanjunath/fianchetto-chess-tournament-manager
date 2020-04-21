@@ -18,16 +18,16 @@ class GridItem extends React.Component{
                 <div className="card">
                     <div className={"row"}>
 
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-edit fa-xs"}></i></button>
-                        </div>
+                        {/*<div className={"col-6"}>*/}
+                        {/*    <button className={"btn btn-white btn-block"}>*/}
+                        {/*        <i className={"fas fa-edit fa-xs"}></i></button>*/}
+                        {/*</div>*/}
 
 
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-trash fa-xs"}></i></button>
-                        </div>
+                        {/*<div className={"col-6"}>*/}
+                        {/*    <button className={"btn btn-white btn-block"}>*/}
+                        {/*        <i className={"fas fa-trash fa-xs"}></i></button>*/}
+                        {/*</div>*/}
                     </div>
                     <img src={this.state.image} className="card-img-top" alt="..."/>
                     <div className="card-body">
