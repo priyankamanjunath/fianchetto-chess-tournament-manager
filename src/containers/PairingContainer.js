@@ -33,7 +33,6 @@ const generateJsonTuple = (tuple) => {
         "home" : {"id" : parseInt(tuple.home)},
         "away" : {"id" : parseInt(tuple.away)}
     }
-    // console.log(val)
     return val
 }
 
@@ -44,11 +43,8 @@ const generatePairings = (participants ,rounds, roundCount) => {
 
     const dataMatchups = swisspair.getMatchups(roundCount, participants, rounds);
 
-    console.log(dataMatchups)
-
     const round = []
     for (let i in dataMatchups) {
-
         let tuple = generateJsonTuple(dataMatchups[i])
         console.log(tuple)
         round.push(tuple)
@@ -124,9 +120,6 @@ class PairingContainer extends React.Component
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.rounds !== this.props.rounds) {
-        //     this.props.findAllRoundsDispatcher()
-        // }
 
     }
 

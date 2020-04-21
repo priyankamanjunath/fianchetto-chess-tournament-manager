@@ -4,6 +4,7 @@ export const CREATE_ROUND = "CREATE_ROUND";
 export const UPDATE_ROUND = "UPDATE_ROUND";
 export const FIND_ROUNDS_MATCHES = "FIND_ROUNDS_MATCHES"
 
+export const UPDATE_MATCHESX = "UPDATE_MATCHESX"
 
 export const findAllRoundsAction = (rounds) => {
 
@@ -56,6 +57,10 @@ export const updateRoundAction = (roundid, round) => ({
     round: round
 })
 
+export const updateMatchesXAction = (matches) => ({
+    type: UPDATE_MATCHESX,
+    matches: matches
+})
 
 
 // findAllRoundsForTournamnetAction(rounds)

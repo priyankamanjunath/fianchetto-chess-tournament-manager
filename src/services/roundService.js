@@ -58,10 +58,10 @@ export const createMatchesForRound = async (roundid, matches) =>
     return await response.json()
 }
 
-export const updateRoundService = async (roundid, round) => {
-    const response = await fetch(`${url}/rounds/${roundid}`, {
+export const updateRoundService = async (roundid, matches) => {
+    const response = await fetch(`${urlJavaServer}/matches`, {
         method: 'PUT',
-        body: JSON.stringify(round),
+        body: JSON.stringify(matches),
         headers: {
             'content-type': 'application/json',
         }
