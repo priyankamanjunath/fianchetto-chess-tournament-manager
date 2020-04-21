@@ -126,6 +126,11 @@ class PairingContainer extends React.Component
 
     render()
     {
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return(
             <div>
                 <PairingHeader

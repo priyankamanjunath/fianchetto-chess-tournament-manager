@@ -2,6 +2,7 @@ import React from "react"
 import {Link} from "react-router-dom";
 import {findRoundsByTournament} from "../../../services/roundService";
 import {findMatchesByRound} from "../../../services/matchService";
+import {Redirect} from "react-router";
 
 class MyMatches extends React.Component {
     constructor(props){
@@ -40,6 +41,12 @@ class MyMatches extends React.Component {
 
 
     render () {
+        console.log(this.props)
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return (
             <div className={"container"}>
                 <div style={{position: "absolute", left: "50%", transform: "translate(-50%, 0%)"}}>

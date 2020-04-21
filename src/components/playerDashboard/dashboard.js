@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {findTournamentsForUser} from "../../actions/userActions"
 import GridItem from "./gridItem";
 import tournamentService from "../../services/tournamentService";
+import {Redirect} from "react-router";
 
 class PlayerActivity extends React.Component {
 
@@ -23,6 +24,11 @@ class PlayerActivity extends React.Component {
     }
 
     render() {
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return (
             <div>
                 <div className={"container"}>
