@@ -1,44 +1,39 @@
-import {CREATE_USER, FIND_USER_TOURNAMENT_INFO} from "../actions/userActions";
+import {CREATE_USER, FIND_USER_INFO, LOGIN, FIND_USER_TOURNAMENT_INFO} from "../actions/userActions";
 
-// let userInfo = {
-//         id: "123",
-//         name: "ABC XYZ",
-//         email: "abcxyz@gmail.com",
-//         password: "not_useful",
-// };
+let userInfo = {
+        id: "123",
+        name: "ABC XYZ",
+        email: "abcxyz@gmail.com",
+        password: "not_useful",
+};
 
-let userTournament =  [
-    {
-        id: "100",
-        name: "Active Tournament 11",
-        type: "online",
-        location: "",
-        prize: "",
-        startDate: "",
-        endDate: "",
-        inProgress: true,
-        winner: "",
-        master: "",
-        playerlist: [],
-        roundList: [],
-    }
-]
-
-const userReducer = (state={userTournament: userTournament}, action) => {
+const userReducer = (state={userInfo: userInfo}, action) => {
     let users;
     switch (action.type) {
-        case FIND_USER_TOURNAMENT_INFO:
+        case FIND_USER_INFO:
             return {
                 ...state,
-                userTournament: action.userInfo
+                userInfo: action.userInfo
             }
         case CREATE_USER:
             users = [...state.users];
             users.push(action.userInfo);
 
             return {
+                users: userInfo
+            }
+        case LOGIN:
+            users = [...state.users];
+            users.push(action.userInfo);
+
+            return {
                 ...state,
-                users: userTournament
+                users: userInfo
+            }
+        case FIND_USER_TOURNAMENT_INFO:
+            return {
+                ...state,
+                userTournament: action.userInfo
             }
         default:
             return state

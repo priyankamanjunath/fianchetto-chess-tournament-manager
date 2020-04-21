@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
+import { Router } from 'react-router';
+import { Route } from 'react-router-dom';
 import Login from "../components/login/login";
 import Register from "../components/register/register";
 import {createStore, combineReducers} from 'redux'
@@ -8,6 +9,7 @@ import userReducer from "../reducers/userReducer"
 import tournamentReducer from "../reducers/tournamentReducer"
 import UserContainer from "./UserContainer";
 import roundReducer from "../reducers/roundReducer";
+import PrivacyPolicy from "../components/privacy-policy/privacy-policy";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -24,16 +26,14 @@ class RoutingContainer extends React.Component
     {
         return(
             <div className={"container-fluid m-0 p-0"}>
-
-                <Router>
+                <Router history={this.props.history}>
                     <Provider store={store}>
                     <Route
                         exact path = "/login"
                         render = {
                             () =>
-                                <div>
-                                    <Login/>
-                                </div>
+                                <Login {...this.props} />
+
                         }
                     />
 
@@ -54,6 +54,15 @@ class RoutingContainer extends React.Component
                             () =>
                                 <div>
                                     <UserContainer/>
+                                </div>
+                        }
+                    />
+                    <Route
+                        path = "/privacy-policy"
+                        render = {
+                            () =>
+                                <div>
+                                    <PrivacyPolicy/>
                                 </div>
                         }
                     />

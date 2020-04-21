@@ -16,7 +16,17 @@ export const createUser = async (userInfo) => {
             'content-type': 'application/json'
         }
     })
+    return await response.json()
+}
 
+export const login = async (userInfo) => {
+    const response = await fetch(`${JPA_SERVER}/api/login`, {
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
     return await response.json()
 }
 
@@ -29,5 +39,6 @@ export const registerForTournament = async (userId, tournamentId) => {
 
 export default {
     findUserInfo,
-    createUser
+    createUser,
+    login
 }
