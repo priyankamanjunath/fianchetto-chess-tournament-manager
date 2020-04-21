@@ -25,9 +25,30 @@ class PlayerActivity extends React.Component {
     render() {
         return (
             <div>
+
                 <div className={"container"}>
                     <br/>
                     <h2 style={{color: "#5D6D7E"}}>Dashboard</h2>
+
+                    <h3 className={"text-center"}>Your Tournaments</h3>
+                    <div className="border-top my-3"/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => item.inProgress &&
+                                        item.master.id == this.props.userId &&
+                                        <GridItem
+                                            key = {index}
+                                            userId = {this.props.userId}
+                                            tournament = {item}
+                                        />
+                                )
+                            }
+                        </div>
+                    </div>
+
                     <h3 className={"text-center"}>Active Tournaments</h3>
                     <div className="border-top my-3"/>
                     <div className={"container col-11"}>
@@ -36,6 +57,7 @@ class PlayerActivity extends React.Component {
                                 this.props.tournamentList.map
                                 (
                                     (item, index) => item.inProgress &&
+                                        !(item.master.id == this.props.userId)  &&
                                     <GridItem
                                         key = {index}
                                         userId = {this.props.userId}

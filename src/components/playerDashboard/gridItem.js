@@ -16,18 +16,7 @@ class GridItem extends React.Component{
         return(
             <div className="col-sm-6 col-md-4 col-lg-3 p-2">
                 <div className="card">
-                    <div className={"row"}>
-
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-edit fa-xs"}></i></button>
-                        </div>
-
-
-                        <div className={"col-6"}>
-                            <button className={"btn btn-white btn-block"}>
-                                <i className={"fas fa-trash fa-xs"}></i></button>
-                        </div>
+                    <div className={'row'}>
                     </div>
                     <img src={this.state.image} className="card-img-top" alt="..."/>
                     <div className="card-body">
