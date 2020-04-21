@@ -20,13 +20,8 @@ class GridItem extends React.Component{
                     </div>
                     <img src={this.state.image} className="card-img-top" alt="..."/>
                     <div className="card-body">
-
-
                         <h5 className="card-title">{this.props.tournament.name}</h5>
-
-
-                        <p className="card-text">Some quick example text to build on the card title and make up the
-                            bulk of the card's content.</p>
+                        <p className="card-text">{this.props.tournament.description}</p>
                         <Link className={"col btn btn-primary"} to = {`/user/${this.props.userId}/tournament/${this.props.tournament.id}/home`}>
                             Go to Tournament
                         </Link>

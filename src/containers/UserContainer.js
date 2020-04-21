@@ -9,6 +9,7 @@ import PlayerDashboard from "../components/playerDashboard/dashboard";
 import roundReducer from "../reducers/roundReducer";
 import {Provider} from "react-redux";
 import UserHome from "../components/playerDashboard/home";
+import CreateTournament from "../components/tournamentDashboard/createTournament/createTournament";
 
 
 
@@ -89,7 +90,7 @@ class UserContainer extends React.Component
                     render = {
                         () =>
                             <div>
-                                <h1>Create Tournament</h1>
+                               <CreateTournament/>
                             </div>
                     }
                 />
