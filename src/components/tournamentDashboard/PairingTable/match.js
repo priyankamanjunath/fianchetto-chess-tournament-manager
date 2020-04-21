@@ -1,53 +1,59 @@
 import React from 'react';
 class Match extends React.Component {
 
+
     state = {
-        result : "NA"
+        match : this.props.match
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.setState({
-            result : this.props.match.result
+            match : this.props.match
         })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.match !== prevProps.match)
-        this.setState({
-            result : this.props.match.result
-        })
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        if(prevProps.match !== this.state.match) {
+            this.setState({
+                match : this.props.match
+            })
+        }
     }
-
-    update = (e) => {
+    updateResults(id, value) {
+        const new_match = {
+            ...this.state.match,
+            id: id,
+            value: value
+        };
         this.setState({
-            result: e.target.value
+            match: new_match
         });
-        this.props.updateRound(this.props.match.id, e.target.value)
+        this.props.updateRound(id, value)
     }
 
     render(){
         return (
 
             <tr>
-                <td>{this.props.match.white}</td>
-                <td>{this.props.match.black}</td>
+                <td>{this.state.match.home.name}</td>
+                <td>{this.state.match.away.name}</td>
+
                 <td>
                     <select
                         className="form-control"
-                        value={this.state.result}
+                        value = {this.state.match.result}
                         onChange ={
-                            (e) => this.update(e)
-                        }
-                    >
-                        <option value={"WIN"}>White Wins</option>
-                        <option value={"LOSS"}>Black Wins</option>
-                        <option value={"DRAW"}>Draw</option>
-                        <option value={"NA"}>InProgress</option>
+                            (e) => this.updateResults(this.state.match.id, e.target.value)
+                        }>
+                        <option value={1}>White Wins</option>
+                        <option value={-1}>Black Wins</option>
+                        <option value={0}>Draw</option>
+                        <option value={-9}>InProgress</option>
                     </select>
 
                 </td>
-                <td>{this.props.match.arbiter}</td>
-                <td>{this.props.match.id}</td>
+                {/*<td>{this.props.match.arbiter.name}</td>*/}
+                <td>{this.state.match.id}</td>
 
 
             </tr>
