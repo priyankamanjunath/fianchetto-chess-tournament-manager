@@ -2,11 +2,12 @@ import React from "react";
 import {findTournamentInfo} from "../../../actions/tournamentActions";
 import tournamentService from "../../../services/tournamentService"
 import {connect} from "react-redux";
+import {Redirect} from "react-router";
 
 class TournamentInfo extends React.Component{
 
     state = {
-        image : "https://upload.wikimedia.org/wikipedia/commons/c/c4/Sahovska_olimpiada_Bled_2002_1.JPG"
+        image : "https://www.tatasteelchess.com/images/home/wijkaanzeemainevent34.jpg"
     }
 
     componentDidMount() {
@@ -15,15 +16,19 @@ class TournamentInfo extends React.Component{
 
 
     render(){
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return(
             <div className="container p-2">
                 <div className="card">
-
-                    <img src={this.state.image} className="card-img-top" alt="..." height="500"
-                         width="42"/>
+                    <img src={this.state.image} className="card-img-top" alt="..." height="auto"
+                         width="50"/>
                     <div className="card-body">
 
-                        <h5 className="card-title">{this.props.tournamentInfo.name}</h5>
+                        <h2 className="card-title"><b><u>{this.props.tournamentInfo.name}</u></b></h2>
 
                         <p className="card-text">Location: {this.props.tournamentInfo.location}</p>
 
@@ -32,9 +37,20 @@ class TournamentInfo extends React.Component{
                             {!this.props.tournamentInfo.inProgress && "No"}
                         </p>
                         <p>
-                            Started on: {this.props.tournamentInfo.startDate.substring(0,10)}
+                            {
+                                this.props.tournamentInfo.startDate &&
+                                <span>
+                                Started on: {this.props.tournamentInfo.startDate.substring(0,10)}
+                                </span>
+                            }
                             <br/>
-                            Ended on: {this.props.tournamentInfo.endDate.substring(0,10)}
+                            {
+                                this.props.tournamentInfo.endDate &&
+                                <span>
+                                Ended on: {this.props.tournamentInfo.endDate.substring(0,10)}
+                                </span>
+                            }
+                            <br/>
                         </p>
                         <p>
                             Prize: {this.props.tournamentInfo.prize}

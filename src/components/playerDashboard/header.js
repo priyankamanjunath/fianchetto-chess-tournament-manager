@@ -2,16 +2,14 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 
-class Header extends React.Component {
+class UserHeader extends React.Component {
     render() {
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-                <Link to={"/login"}>
-                    <a className="btn btn-primary" >
-                        <i className="fas fa fa-times text-white"/>
-                    </a>
-                </Link>
-                <a className="navbar-brand wbdv-course-title" href="#">User Dashboard</a>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+                {/*<Link to={"/login"} className="btn btn-primary">*/}
+                {/*        <i className="fas fa fa-times text-white"/>*/}
+                {/*</Link>*/}
+                <Link className="navbar-brand wbdv-course-title" to={`/user/${this.props.userId}/home`}>Home</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"/>
@@ -19,22 +17,30 @@ class Header extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Activity<span className="sr-only">(current)</span></a>
+                            <Link className="nav-link" to={`dashboard`}>
+                                Dashboard
+                                <span className="sr-only">(current)</span>
+                            </Link>
                         </li>
 
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Profile<span className="sr-only">(current)</span></a>
+                            <Link className="nav-link" to={`profile`}>
+                                Profile
+                                <span className="sr-only">(current)</span>
+                            </Link>
                         </li>
 
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Settings<span className="sr-only">(current)</span></a>
-                        </li>
                         <li>
-                            <Link to={"/createTournament"}><a class = "nav-link">Create New Tournamanet</a></Link>
+                            <Link to={`create`} className = "nav-link">
+                                Create New Tournament
+                            </Link>
                         </li>
-
-
                     </ul>
+                    <div className="text-white ml-auto">
+                        <Link to={`/login`} className = "nav-link">
+                            <span className="text-white">Log out</span>
+                        </Link>
+                    </div>
                 </div>
             </nav>
         )
@@ -42,4 +48,4 @@ class Header extends React.Component {
 
 
 }
-export default Header
+export default UserHeader

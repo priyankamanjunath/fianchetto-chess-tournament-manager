@@ -1,122 +1,126 @@
-import React from 'react';
+import React, {Component} from 'react';
 import "./login.css"
 import {Link} from "react-router-dom";
+import userService from "../../services/userService";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
-const Login = () =>
+const MySwal = withReactContent(Swal);
 
+class Login extends Component {
 
-    <div className="container">
-        <h1 className={"text-center"}>Sign In</h1>
+    state = {
+        newUserEmail: "",
+        newUserPassword: ""
+    };
 
-        <form>
-            <div className="form-group row">
-                <label htmlFor="username" className="col-sm-2 col-form-label">
-                    Username
-                </label>
-                <div className="col-sm-10">
-                    <input className="form-control wbdv-field wbdv-username"
-                           id="username"
-                           placeholder="Your User Name"/>
+    handlEmailChange = e => {
+        this.setState({newUserEmail: e.target.value});
+    };
+
+    handlePasswordChange = e => {
+        this.setState({newUserPassword: e.target.value});
+    };
+
+    submitLogin = () => {
+        const userLogin = {
+            email: this.state.newUserEmail,
+            password: this.state.newUserPassword
+        };
+
+        userService.login(userLogin).then(
+            response => {
+                if(response.id !== -1){
+                    this.props.history.push(`/user/${response.id}/home`);
+                } else {
+                    // alert("Wrong email and Password");
+                    MySwal.fire({
+                                  icon: 'error',
+                                  title: 'Wrong Passwrod',
+                                  text: 'Your password and email do not match',
+                                  footer: 'Try again or Click on the Sign up link'
+                              })
+                }
+
+            }
+        )
+
+    };
+
+    render() {
+        return (
+            <div className="background">
+                <div className=""><h1
+                    className="font-weight-bolder text-center text-white">Fianchetto</h1></div>
+                <div className="row">
+                    <div className="col-sm-4"/>
+                    <div className="col-sm-4"/>
+                    <div className="col-sm-4 text-left">
+
+                        <form className="m-5">
+                            <div className="form-group row">
+                                <label htmlFor="username"
+                                       className="col-sm-3 col-form-label text-white">
+                                    Email
+                                </label>
+                                <div className="col-sm-9">
+                                    <input className="form-control wbdv-field wbdv-username bg-transparent text-white"
+                                           id="username"
+                                           placeholder="email"
+                                           onChange={this.handlEmailChange}/>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label htmlFor="password"
+                                       className="col-sm-3 col-form-label text-white">
+                                    Password </label>
+                                <div className="col-sm-9">
+                                    <input type="password" className="form-control bg-transparent text-white"
+                                           id="password" placeholder="password"
+                                           onChange={this.handlePasswordChange}/>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-3 col-form-label"/>
+                                <div className="col-sm-9">
+                                    <Link to={"/login"}>
+                                        <button onClick={this.submitLogin}
+                                                className="btn btn-primary btn-block wbdv-login">Sign
+                                            in
+                                        </button>
+                                    </Link>
+                                    <div className="row">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <div className={"col-sm-2"}/>
+                                <div className={"col-sm-10"}>
+                                    <div className="text-center">
+                                        <Link to={"/register"}>
+                                            <a className="">
+                                                Sign up</a>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-            </div>
-
-            <div className="form-group row">
-                <label htmlFor="password" className="col-sm-2 col-form-label">
-                    Password </label>
-                <div className="col-sm-10">
-                    <input type="password" className="form-control"
-                           id="password" placeholder="123qwe#$%"/>
-                </div>
-            </div>
-
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label"></label>
-                <div className="col-sm-10">
-                    <Link to={"/user/1/dashboard"}>
-                        <button className="btn btn-primary btn-block wbdv-login">Sign in</button>
+                <div className = "privacy-policy">
+                    <Link to={"/privacy-policy"}>
+                        Privacy Policy
                     </Link>
-                    <div className="row">
-
-                    </div>
                 </div>
             </div>
+        )
+    }
 
-            <div className="form-group row">
-                <div className={"col-sm-2"}></div>
-                <div className={"col-sm-10"}>
-                    <div className="col">
-                        <a href="#" className="">Forgot Password?</a>
-                    </div>
-                    <div className="col">
-                        <Link to={"/register"}>
-                        <a href="../signup/signup.template.client.html"
-                           className="float-right">
-                            Sign up</a>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
-        </form>
-    </div>
-
-
-// <div className="container-fluid pm-sign-in-content">
-    //     <div className="row justify-content-center">
-    //         <span className="whiteboard-title">WhiteBoard</span>
-    //     </div>
-    //
-    //     <span>Sign In</span>
-    //
-    // <div>
-    //     <form>
-    //         <div className="form-group row">
-    //             <label htmlFor="username" className="col-sm-2 col-form-label">
-    //                 Username </label>
-    //             <div className="col-sm-10">
-    //                 <input className="form-control wbdv-field wbdv-username"
-    //                        id="username"/>
-    //             </div>
-    //         </div>
-    //         <div className="form-group row">
-    //             <label htmlFor="password" className="col-sm-2 col-form-label">
-    //                 Password </label>
-    //             <div className="col-sm-10">
-    //                 <input type="password" className="form-control wbdv-field wbdv-password"
-    //                        id="password"/>
-    //             </div>
-    //         </div>
-    //         <div className="form-group row">
-    //             <label className="col-sm-2 col-form-label"></label>
-    //             <div className="col-sm-10 wbdv-button wbdv-login">
-    //
-    //             <Link className="text-white" to="./Chessboard">
-    //                 <button className="btn btn-primary btn-block wbdv-button wbdv-login pm-login-button">
-    //                     Sign in
-    //                 </button>
-    //             </Link>
-    //
-    //                 {/*<div>*/}
-    //                 {/*    <div className="row justify-content-center p-sm-3 ">*/}
-    //                 {/*        <Link className="wbdv-link wbdv-forgot-password" to="#">Forgot Password?</Link>*/}
-    //                 {/*    </div>*/}
-    //                 {/*    <Link className="row justify-content-center p-sm-3" to="./Chessboard">*/}
-    //                 {/*        Sign up*/}
-    //                 {/*    </Link>*/}
-    //
-    //                 {/*    <Link className="text-white"*/}
-    //                 {/*          to="./Chessboard">*/}
-    //                 {/*        Go to Chessboard*/}
-    //                 {/*    </Link>*/}
-    //                 {/*</div>*/}
-    //                 {/*<button className="btn btn-danger btn-block wbdv-login text-white mt-5"><a*/}
-    //                 {/*    className="text-white" href="../index.html">Cancel</a>*/}
-    //                 {/*</button>*/}
-    //             </div>
-    //         </div>
-    //     </form>
-    // </div>
-{/*</div>;*/}
-
+}
 
 export default Login

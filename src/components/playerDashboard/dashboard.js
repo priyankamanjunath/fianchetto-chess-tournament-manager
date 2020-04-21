@@ -1,20 +1,17 @@
 import React from "react";
-import Header from "./header";
-import Grid from "./grid";
-import ParticlesBg from "particles-bg";
 import {connect} from "react-redux";
-import userService from "../../services/userService";
-import {findUserInfo} from "../../actions/userActions";
+import {findTournamentsForUser} from "../../actions/userActions"
 import GridItem from "./gridItem";
+import tournamentService from "../../services/tournamentService";
+import {Redirect} from "react-router";
 
-class Dashboard extends React.Component {
+class PlayerActivity extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            userInfo: {
-                tournamentList: []
-            }
+            userInfo: {},
+            tournamentList: {},
         }
     }
 
@@ -22,57 +19,74 @@ class Dashboard extends React.Component {
         this.props.findUserInfo(this.props.userId)
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+
+    }
+
     render() {
-        let config = {
-            num: [4, 7],
-            rps: 0.1,
-            radius: [5, 40],
-            life: [1.5, 3],
-            v: [2, 3],
-            tha: [-50, 50],
-            alpha: [0.6, 0],
-            scale: [.1, 0.9],
-            // body: icon,
-            position: "all",
-            //color: ["random", "#ff0000"],
-            cross: "dead",
-            random: 10
-        };
+        if (this.props.userId == -1) {
+            return (
+                <Redirect to={'/'}/>
+            )
+        }
         return (
             <div>
-                <Header/>
                 <div className={"container"}>
-                    <h3 className={"text-center"}>Active</h3>
+                    <h3 className={"text-center"}>Your Tournaments</h3>
                     <div className="border-top my-3"/>
                     <div className={"container col-11"}>
                         <div className={"row"}>
                             {
-                                this.props.tournamentList.map(item =>
-                                    item.inProgress &&
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => item.inProgress &&
+                                        item.master.id == this.props.userId &&
+                                        <GridItem
+                                            key = {index}
+                                            userId = {this.props.userId}
+                                            tournament = {item}
+                                        />
+                                )
+                            }
+                        </div>
+                    </div>
+
+                    <h3 className={"text-center"}>Participating Tournaments</h3>
+                    <div className="border-top my-3"/>
+                    <div className={"container col-11"}>
+                        <div className={"row"}>
+                            {
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => item.inProgress &&
+                                        !(item.master.id == this.props.userId)  &&
                                     <GridItem
+                                        key = {index}
                                         userId = {this.props.userId}
-                                        tournament = {item}/>
+                                        tournament = {item}
+                                    />
                                 )
                             }
                         </div>
                     </div>
 
-                    <h3 className={"text-center"}>Past</h3>
+                    <h3 className={"text-center"}>Past Tournaments</h3>
                     <div className="border-top my-3"/>
                     <div className={"container col-11"}>
                         <div className={"row"}>
                             {
-                                this.props.tournamentList.map(item =>
-                                                                  !item.inProgress &&
-                                                                  <GridItem
-                                                                      userId = {this.props.userId}
-                                                                      tournament = {item}/>
+                                this.props.tournamentList.map
+                                (
+                                    (item, index) => !item.inProgress &&
+                                      <GridItem
+                                          key = {index}
+                                          userId = {this.props.userId}
+                                          tournament = {item}
+                                      />
                                 )
                             }
                         </div>
                     </div>
-                    <ParticlesBg type="cobweb" config={config} bg={true}/>
-
                 </div>
            </div>
        )
@@ -80,8 +94,9 @@ class Dashboard extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => {
+    console.log(state)
     return {
-        tournamentList: state.userReducer.userInfo.tournamentList
+        tournamentList: state.userReducer.userTournament
     }
 };
 
@@ -89,13 +104,15 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         findUserInfo: (userId) => {
-            userService.findUserInfo(userId)
-                .then(userInfo =>
-                          dispatch(findUserInfo(userInfo)))
-
+            tournamentService.findTournamentsForUser(userId)
+                .then(userTour =>
+                      {
+                          dispatch(findTournamentsForUser(userTour))
+                      }
+                )
         }
     }
 };
 
 
-export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(Dashboard)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(PlayerActivity)
