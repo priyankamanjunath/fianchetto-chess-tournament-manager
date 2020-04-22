@@ -49,8 +49,16 @@ class Login extends Component {
     render() {
         return (
             <div className="container-fluid background">
-                <div className=""><h1
-                    className="font-weight-bolder text-center text-white">Fianchetto</h1></div>
+                <div className={"container"}>
+                <div className="row">
+                    <div className={"col"}/>
+                    <div className={"col"}>
+                        <h1 className="font-weight-bolder text-center text-white">Fianchetto</h1>
+                    </div>
+                    <div className={"col"}/>
+
+
+                </div>
                 <div className="row">
                     <div className="col-sm-4"/>
                     <div className="col-sm-4"/>
@@ -115,6 +123,7 @@ class Login extends Component {
                     <Link to={"/privacy-policy"}>
                         Privacy Policy
                     </Link>
+                </div>
                 </div>
             </div>
         )

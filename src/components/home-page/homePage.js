@@ -9,7 +9,7 @@ export class HomePageComponent extends React.Component {
         super(props)
         this.state = {
             tournaments: [],
-            img : "http://clipart-library.com/data_images/399411.jpg    "
+            
         }
     }
 
@@ -61,7 +61,7 @@ export class HomePageComponent extends React.Component {
                             {
                                 this.state.tournaments.map(
                                     (tournament,index) =>
-                                    <div className="col-sm-6 col-md-4 col-lg-3 p-2" >
+                                    <div className="col-sm-6 col-md-4 col-lg-4 p-4" >
                                         <div className="card bg-transparent text-white border border-white">
                                             <img className = "card-img-top m2 bg-transparent text-white"
                                                  src="https://media.istockphoto.com/vectors/vector-chess-pieces-team-isolated-on-white-silhouettes-of-chess-vector-id946495138?k=6&m=946495138&s=612x612&w=0&h=QBjPmREFCqfEM0Tw-bizel-liYuk8Umf5eRNbz-bOhg=" className="card-img-top" alt="..."/>
@@ -80,7 +80,7 @@ export class HomePageComponent extends React.Component {
                             }
                         </div>
                     </div>
-                    <nav className="navbar bottom navbar-white bg-white ">
+                    <nav className="navbar bottom navbar-light bg-light ">
                         <div className={"col"}/>
                         <div className={"col text-center text-black"}>
                             <Link className="navbar-item " to="/privacy-policy">Privacy Policy</Link>
