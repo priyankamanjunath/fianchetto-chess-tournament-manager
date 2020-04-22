@@ -33,7 +33,6 @@ class Login extends Component {
                 if(response.id !== -1){
                     this.props.history.push(`/user/${response.id}/home`);
                 } else {
-                    // alert("Wrong email and Password");
                     MySwal.fire({
                                   icon: 'error',
                                   title: 'Wrong Passwrod',
@@ -49,7 +48,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="background">
+            <div className="container-fluid background">
                 <div className=""><h1
                     className="font-weight-bolder text-center text-white">Fianchetto</h1></div>
                 <div className="row">

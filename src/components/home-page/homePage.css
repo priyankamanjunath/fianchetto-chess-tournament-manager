@@ -1,0 +1,13 @@
+.login-buttons{
+    position:absolute;
+    top:40px;
+    right:40px;
+    font-size: x-large;
+}
+
+.top-image-2{
+    background-image: url("../../images/2.jpg");
+    width: 100%;
+    height: auto;
+    size: inherit;
+}

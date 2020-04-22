@@ -10,7 +10,7 @@ import tournamentReducer from "../reducers/tournamentReducer"
 import UserContainer from "./UserContainer";
 import roundReducer from "../reducers/roundReducer";
 import PrivacyPolicy from "../components/privacy-policy/privacy-policy";
-import {HomePageComponent} from "../components/homePage";
+import {HomePageComponent} from "../components/home-page/homePage";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -39,15 +39,6 @@ class RoutingContainer extends React.Component
                         }
                     />
 
-
-                    <Route
-                        exact path = "/"
-                        render = {
-                            () =>
-                                <Login {...this.props} />
-
-                        }
-                    />
                     <Route
                         exact path = "/login"
                         render = {
