@@ -1,15 +1,14 @@
 .top-image{
-    background-image: url("../../images/3.jpg");
-    background-size: 100%;
-    background-repeat:no-repeat;
-    min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0
-}
+     background-image: url("../../images/3.jpg");
+     background-repeat:no-repeat;
+     min-height: 100%;
+     min-width: 1024px;
+     width: 100%;
+     height: auto;
+     position: fixed;
+     top: 0;
+     left: 0
+ }
 
 
 .hero {

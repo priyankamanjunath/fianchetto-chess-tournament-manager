@@ -2,7 +2,6 @@
 import rounds from "./rounds"
 import {JPA_SERVER} from "../constants/endpoints";
 
-const url = "https://wbdv-generic-server.herokuapp.com/api/akshay"
 const urlJavaServer = "https://fianchetto-java.herokuapp.com/api"
 
 export const findAllRoundsService = () =>

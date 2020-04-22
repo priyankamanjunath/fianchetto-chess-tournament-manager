@@ -13,7 +13,7 @@ class Profile extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         userService.findUserInfo(this.props.userId).then(res => this.setState({userInfo: res}));
         tournamentService.findTournamentsForUser(this.props.userId)
             .then(res => this.setState({tournamentList: res}));
