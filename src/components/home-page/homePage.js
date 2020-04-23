@@ -9,7 +9,7 @@ export class HomePageComponent extends React.Component {
         super(props)
         this.state = {
             tournaments: [],
-            
+
         }
     }
 
@@ -26,7 +26,7 @@ export class HomePageComponent extends React.Component {
             <div className={"top-image-2"}>
 
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-                    <Link className="navbar-brand wbdv-course-title" to={`/`}>Fianchetto</Link>
+                    <Link className="navbar-brand  " to={`/`}>Fianchetto</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"/>
